@@ -1,67 +1,159 @@
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 30px;
-  border-bottom: 2px solid #2ecc71;
-  background: #fff;
-}
+/* =========================================================
+   header.css
+   Purpose:
+   - Site header
+   - Main navigation
+   - Dropdown menus (video-accurate)
+   - Clean corporate styling
+   ========================================================= */
 
-.logo img {
-  height: 60px;
-}
-
-.nav ul {
-  list-style: none;
-  display: flex;
-  gap: 22px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 120%;
-  left: 0;
-  background: white;
-  min-width: 220px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+/* ---------- Header Wrapper ---------- */
+.site-header {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 2px solid var(--color-primary);
+  position: sticky;
+  top: 0;
   z-index: 1000;
 }
 
-.dropdown-menu li {
-  padding: 10px 14px;
+/* ---------- Header Inner ---------- */
+.site-header .header-inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 12px var(--container-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+/* ---------- Logo ---------- */
+.site-header .logo img {
+  height: 56px;
+  width: auto;
+}
+
+/* ---------- Navigation ---------- */
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
+.main-nav > ul {
+  display: flex;
+  gap: 22px;
+}
+
+/* ---------- Nav Links ---------- */
+.main-nav a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  padding: 8px 4px;
+  transition: color var(--transition-fast);
+}
+
+.main-nav a:hover {
+  color: var(--color-primary);
+}
+
+/* ---------- Dropdown Container ---------- */
+.main-nav .dropdown {
+  position: relative;
+}
+
+/* ---------- Dropdown Arrow ---------- */
+.main-nav .dropdown > a::after {
+  content: "▾";
+  font-size: 0.7rem;
+  margin-left: 6px;
+}
+
+/* ---------- Dropdown Menu ---------- */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 220px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--transition-fast),
+              transform var(--transition-fast),
+              visibility var(--transition-fast);
+}
+
+/* ---------- Dropdown Items ---------- */
 .dropdown-menu li a {
-  color: #333;
   display: block;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+  white-space: nowrap;
 }
 
+.dropdown-menu li a:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-primary);
+}
+
+/* ---------- Show Dropdown on Hover ---------- */
+.main-nav .dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ---------- Header Actions (Search + Login) ---------- */
 .header-actions {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
 }
 
-.header-actions input {
-  padding: 6px 10px;
-}
-
-.login-btn {
-  background: #2ecc71;
-  color: #fff;
-  padding: 8px 14px;
+/* ---------- Search Input ---------- */
+.header-actions input[type="search"] {
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  border: 1px solid var(--color-gray-300);
   border-radius: 4px;
-  text-decoration: none;
+  outline: none;
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.header-actions input[type="search"]:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.15);
+}
+
+/* ---------- Login Button ---------- */
+.header-actions .login-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-radius: 4px;
+  transition: background-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+.header-actions .login-btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Accessibility ---------- */
+.main-nav a:focus-visible,
+.header-actions input:focus-visible,
+.header-actions .login-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
