@@ -1,17 +1,101 @@
-footer {
-  background: #111;
-  color: #fff;
-  padding: 40px 20px;
+/* =========================================================
+   footer.css
+   Purpose:
+   - Site footer styling
+   - Partner / regulator logos
+   - Legal text and links
+   - Clean corporate appearance
+   ========================================================= */
+
+/* ---------- Footer Wrapper ---------- */
+.site-footer {
+  background-color: var(--color-secondary);
+  color: var(--color-gray-200);
+  padding: 50px 0 30px;
+  margin-top: 80px;
+}
+
+/* ---------- Footer Inner ---------- */
+.site-footer .footer-inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
   text-align: center;
 }
 
+/* ---------- Partner / Regulator Logos ---------- */
+.footer-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 30px;
+}
+
 .footer-logos img {
-  height: 50px;
-  margin: 10px;
+  height: 48px;
+  width: auto;
+  filter: grayscale(100%);
+  opacity: 0.85;
+  transition: filter var(--transition-fast),
+              opacity var(--transition-fast),
+              transform var(--transition-fast);
 }
 
-footer p {
-  margin-top: 20px;
-  font-size: 14px;
+.footer-logos img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: translateY(-2px);
 }
 
+/* ---------- Footer Text ---------- */
+.site-footer p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-gray-300);
+  margin-top: 12px;
+}
+
+/* ---------- Footer Links ---------- */
+.site-footer a {
+  color: var(--color-gray-200);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.site-footer a:hover {
+  color: var(--color-primary);
+}
+
+/* ---------- Divider ---------- */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 28px 0;
+}
+
+/* ---------- Disclaimer Link ---------- */
+.footer-disclaimer {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+/* ---------- Accessibility ---------- */
+.site-footer a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ---------- Responsive Footer ---------- */
+@media (max-width: 768px) {
+  .footer-logos {
+    gap: 18px;
+  }
+
+  .footer-logos img {
+    height: 40px;
+  }
+}
