@@ -1,64 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abdul Mannan Butt | Frontend Developer</title>
-
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <title>Saima Qaiser Securities (Pvt) Limited</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script defer src="assets/js/menu.js"></script>
 </head>
 <body>
 
-  <!-- HERO SECTION (Video-style) -->
-  <section class="hero">
-    <img
-      src="assets/images/abdul-mannan-butt.jpg"
-      alt="Abdul Mannan Butt"
-      class="profile-image"
-    />
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <img src="assets/images/logo.png" alt="SQS">
+  </div>
 
-    <h1>Abdul Mannan Butt</h1>
-    <h2>Frontend Developer</h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
 
-    <p class="subtitle">
-      Frontend & WordPress Developer specializing in modern web interfaces
-    </p>
+      <li class="dropdown">
+        <a href="#">About us</a>
+        <ul class="dropdown-menu">
+          <li><a href="about.html">Company Profile</a></li>
+          <li><a href="governance.html">Management</a></li>
+        </ul>
+      </li>
 
-    <button class="disclaimer-btn" onclick="toggleDisclaimer()">
-      View Disclaimer
-    </button>
-  </section>
+      <li><a href="services.html">Services</a></li>
 
-  <!-- DISCLAIMER (Same Page) -->
-  <section id="disclaimer" class="disclaimer hidden">
-    <h3>Disclaimer</h3>
+      <li class="dropdown">
+        <a href="#">Investor Information</a>
+        <ul class="dropdown-menu">
+          <li><a href="kyc-cdd.html">KYC / CDD</a></li>
+        </ul>
+      </li>
 
-    <p>
-      Abdul Mannan Butt has no affiliation with any unofficial pages, profiles,
-      apps, or WhatsApp numbers.
-    </p>
+      <li class="dropdown">
+        <a href="#">Investors Portal</a>
+        <ul class="dropdown-menu">
+          <li><a href="feedback.html">Feedback Form</a></li>
+        </ul>
+      </li>
 
-    <p>
-      We never request OTPs, personal information, funds, or investments through
-      unofficial platforms.
-    </p>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-    <p>
-      All communication is conducted only through official channels.
-    </p>
+  <div class="header-actions">
+    <input type="search" placeholder="Search">
+    <a class="login-btn" href="#">Client Login</a>
+  </div>
+</header>
 
-    <p>
-      Always verify the authenticity of any communication and ensure you are
-      dealing with licensed and registered professionals.
-    </p>
+<!-- HERO -->
+<section class="hero">
+  <h1>Welcome To Saima Qaiser Securities</h1>
+  <p>(Pvt) Limited</p>
+  <a href="about.html" class="btn">Read More</a>
+</section>
 
-    <p class="official">
-      Official Website: <strong>https://saimaqaiser.com</strong>
-    </p>
+<!-- FOOTER -->
+<footer class="footer">
+  <img src="assets/images/icons/psx.png">
+  <img src="assets/images/icons/secp.png">
+  <p>© 2019. All rights reserved</p>
+</footer>
 
-    <button class="close-btn" onclick="toggleDisclaimer()">Close</button>
-  </section>
-
-  <script src="assets/js/main.js"></script>
 </body>
 </html>
