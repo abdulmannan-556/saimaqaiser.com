@@ -1,58 +1,88 @@
 /* =========================================================
    menu.js
    Purpose:
-   - Dropdown menu behavior for desktop & mobile
+   - Primary navigation dropdown handling
+   - Hover + click support
    - Keyboard accessibility
-   - Multi-level menus
-   - Security-safe
+   - Mobile-safe behavior
+   - No external libraries
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const dropdowns = document.querySelectorAll(".dropdown");
+(function () {
+  "use strict";
 
-  dropdowns.forEach(dropdown => {
-    const trigger = dropdown.querySelector("a");
-    const menu = dropdown.querySelector(".dropdown-menu");
+  /* =========================================================
+     HELPER: CLOSE ALL DROPDOWNS
+     ========================================================= */
+  function closeAllDropdowns() {
+    document.querySelectorAll(".has-dropdown").forEach(function (item) {
+      item.classList.remove("open");
+    });
+  }
 
-    // Desktop hover is handled by CSS; focus/keyboard:
-    trigger.addEventListener("focus", () => {
-      menu.style.visibility = "visible";
-      menu.style.opacity = "1";
-      menu.style.transform = "translateY(0)";
+  /* =========================================================
+     INITIALIZE MENU
+     ========================================================= */
+  document.addEventListener("DOMContentLoaded", function () {
+    const dropdownItems = document.querySelectorAll(".has-dropdown");
+
+    dropdownItems.forEach(function (item) {
+      const trigger = item.querySelector("a");
+      const menu = item.querySelector(".dropdown");
+
+      if (!trigger || !menu) return;
+
+      /* ---------- Desktop: hover ---------- */
+      item.addEventListener("mouseenter", function () {
+        item.classList.add("open");
+      });
+
+      item.addEventListener("mouseleave", function () {
+        item.classList.remove("open");
+      });
+
+      /* ---------- Mobile: click ---------- */
+      trigger.addEventListener("click", function (e) {
+        const isMobile = window.innerWidth <= 992;
+
+        if (isMobile) {
+          e.preventDefault();
+
+          const isOpen = item.classList.contains("open");
+          closeAllDropdowns();
+
+          if (!isOpen) {
+            item.classList.add("open");
+          }
+        }
+      });
+
+      /* ---------- Keyboard accessibility ---------- */
+      trigger.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          item.classList.toggle("open");
+        }
+
+        if (e.key === "Escape") {
+          item.classList.remove("open");
+          trigger.blur();
+        }
+      });
     });
 
-    trigger.addEventListener("blur", () => {
-      menu.style.visibility = "hidden";
-      menu.style.opacity = "0";
-      menu.style.transform = "translateY(10px)";
+    /* ---------- Close dropdowns on outside click ---------- */
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".has-dropdown")) {
+        closeAllDropdowns();
+      }
     });
 
-    // Keyboard control
-    trigger.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        const isVisible = menu.style.visibility === "visible";
-        menu.style.visibility = isVisible ? "hidden" : "visible";
-        menu.style.opacity = isVisible ? "0" : "1";
-        menu.style.transform = isVisible ? "translateY(10px)" : "translateY(0)";
-      } else if (e.key === "Escape") {
-        menu.style.visibility = "hidden";
-        menu.style.opacity = "0";
-        menu.style.transform = "translateY(10px)";
-        trigger.blur();
+    /* ---------- Close dropdowns on resize ---------- */
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 992) {
+        closeAllDropdowns();
       }
     });
   });
-
-  // Close dropdowns if clicked outside
-  document.addEventListener("click", (e) => {
-    dropdowns.forEach(dropdown => {
-      const menu = dropdown.querySelector(".dropdown-menu");
-      if (!dropdown.contains(e.target)) {
-        menu.style.visibility = "hidden";
-        menu.style.opacity = "0";
-        menu.style.transform = "translateY(10px)";
-      }
-    });
-  });
-});
+})();
