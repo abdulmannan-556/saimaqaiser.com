@@ -1,69 +1,42 @@
 /* =========================================================
    slider.js
    Purpose:
-   - Homepage slider functionality
-   - Auto-slide & manual navigation
-   - Responsive & accessible
-   - Security-safe ES6
+   - Hero slider functionality
+   - Auto-rotation with fade effect
+   - Safe fallback if only one slide exists
+   - No external libraries
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const sliders = document.querySelectorAll(".slider-container");
+(function () {
+  "use strict";
 
-  sliders.forEach(slider => {
-    const slides = slider.querySelectorAll(".slider-slide");
-    const controls = slider.querySelectorAll(".slider-controls button");
+  document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.querySelector(".hero-slider");
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll(".hero-slide");
+    if (slides.length <= 1) return;
+
     let currentIndex = 0;
-    let intervalId = null;
+    const intervalTime = 6000; // 6 seconds
 
-    const showSlide = (index) => {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-        slide.setAttribute("aria-hidden", i !== index);
-      });
-      controls.forEach((btn, i) => {
-        btn.classList.toggle("active", i === index);
-        btn.setAttribute("aria-pressed", i === index);
-      });
-      currentIndex = index;
-    };
-
-    const nextSlide = () => {
-      showSlide((currentIndex + 1) % slides.length);
-    };
-
-    const startAutoSlide = () => {
-      intervalId = setInterval(nextSlide, 6000);
-    };
-
-    const stopAutoSlide = () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-
-    // Manual controls
-    controls.forEach((btn, i) => {
-      btn.addEventListener("click", () => {
-        showSlide(i);
-        stopAutoSlide();
-        startAutoSlide();
-      });
+    slides.forEach((slide, index) => {
+      slide.style.opacity = index === 0 ? "1" : "0";
+      slide.style.zIndex = index === 0 ? "2" : "1";
     });
 
-    // Keyboard accessibility
-    slider.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        nextSlide();
-        stopAutoSlide();
-        startAutoSlide();
-      } else if (e.key === "ArrowLeft") {
-        showSlide((currentIndex - 1 + slides.length) % slides.length);
-        stopAutoSlide();
-        startAutoSlide();
-      }
-    });
+    function showNextSlide() {
+      const currentSlide = slides[currentIndex];
+      currentSlide.style.opacity = "0";
+      currentSlide.style.zIndex = "1";
 
-    // Initialize
-    showSlide(0);
-    startAutoSlide();
+      currentIndex = (currentIndex + 1) % slides.length;
+
+      const nextSlide = slides[currentIndex];
+      nextSlide.style.opacity = "1";
+      nextSlide.style.zIndex = "2";
+    }
+
+    setInterval(showNextSlide, intervalTime);
   });
-});
+})();
