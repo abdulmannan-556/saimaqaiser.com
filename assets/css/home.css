@@ -1,1 +1,171 @@
+/* =========================================================
+   home.css
+   Purpose:
+   - Home page layout
+   - Hero section with profile
+   - Slider section
+   - CTA sections
+   - Animations integrated
+   ========================================================= */
 
+/* ---------- Hero Section ---------- */
+.hero-section {
+  position: relative;
+  background-color: var(--color-gray-100);
+  padding: 100px 0 60px;
+  text-align: center;
+}
+
+.hero-section .hero-inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* ---------- Profile Image ---------- */
+.hero-profile {
+  margin-bottom: 20px;
+}
+
+.hero-profile img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--color-primary);
+  animation: scaleIn 0.8s var(--ease-out-soft) forwards;
+}
+
+/* ---------- Profile Name & Title ---------- */
+.hero-name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  margin-bottom: 6px;
+}
+
+.hero-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 30px;
+}
+
+/* ---------- Hero Subtitle / Tagline ---------- */
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--color-gray-700);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ---------- CTA Buttons ---------- */
+.hero-cta {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.hero-cta .btn {
+  min-width: 140px;
+}
+
+/* ---------- Slider Section ---------- */
+.slider-section {
+  margin-top: 80px;
+  position: relative;
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-slide {
+  width: 100%;
+  display: none;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.slider-slide.active {
+  display: block;
+  animation: fadeIn 0.8s var(--ease-out-soft) forwards;
+}
+
+/* ---------- Slider Controls ---------- */
+.slider-controls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.slider-controls button {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-gray-300);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.slider-controls button.active {
+  background-color: var(--color-primary);
+}
+
+/* ---------- CTA Sections ---------- */
+.cta-section {
+  padding: 60px 0;
+  background-color: var(--color-gray-100);
+  text-align: center;
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.cta-section h2 {
+  font-size: 1.8rem;
+  color: var(--color-secondary);
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  font-size: 1rem;
+  color: var(--color-gray-700);
+  max-width: 680px;
+  margin: 0 auto 24px;
+}
+
+/* ---------- Accessibility ---------- */
+.hero-section a:focus-visible,
+.cta-section a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive Home ---------- */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 0 40px;
+  }
+
+  .hero-profile img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-name {
+    font-size: 1.8rem;
+  }
+
+  .hero-title {
+    font-size: 1rem;
+  }
+
+  .cta-section {
+    padding: 40px 0;
+  }
+}
