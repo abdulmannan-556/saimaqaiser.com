@@ -1,73 +1,73 @@
 /* =========================================================
    utils.js
    Purpose:
-   - Utility JS functions for the entire website
-   - DOM helpers
-   - Throttle / debounce
-   - Smooth scroll helper
-   - Security-safe
+   - Shared helper utilities
+   - Performance-safe helpers
+   - DOM utilities
+   - Used across pages where needed
    ========================================================= */
 
-/* ---------- DOM Selector Helpers ---------- */
-const $ = (selector, parent = document) => parent.querySelector(selector);
-const $$ = (selector, parent = document) => Array.from(parent.querySelectorAll(selector));
+(function () {
+  "use strict";
 
-/* ---------- Throttle Function ---------- */
-function throttle(fn, wait) {
-  let isThrottled = false, args, context;
-  return function () {
-    if (isThrottled) {
-      args = arguments;
-      context = this;
-      return;
-    }
-    fn.apply(this, arguments);
-    isThrottled = true;
-    setTimeout(() => {
-      isThrottled = false;
-      if (args) {
+  /* =========================================================
+     HELPER: DEBOUNCE
+     Prevents excessive function calls (scroll/resize)
+     ========================================================= */
+  window.debounce = function (fn, delay) {
+    let timeout;
+    return function () {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
         fn.apply(context, args);
-        args = context = null;
-      }
-    }, wait);
+      }, delay);
+    };
   };
-}
 
-/* ---------- Debounce Function ---------- */
-function debounce(fn, delay) {
-  let timeout;
-  return function () {
-    const context = this;
-    const args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn.apply(context, args), delay);
+  /* =========================================================
+     HELPER: ADD CLASS SAFELY
+     ========================================================= */
+  window.addClass = function (el, className) {
+    if (el && className && !el.classList.contains(className)) {
+      el.classList.add(className);
+    }
   };
-}
 
-/* ---------- Smooth Scroll to Element ---------- */
-function smoothScrollTo(el, offset = 0) {
-  const top = el.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({
-    top: top,
-    behavior: "smooth"
+  /* =========================================================
+     HELPER: REMOVE CLASS SAFELY
+     ========================================================= */
+  window.removeClass = function (el, className) {
+    if (el && className && el.classList.contains(className)) {
+      el.classList.remove(className);
+    }
+  };
+
+  /* =========================================================
+     SCROLL TO TOP BUTTON (OPTIONAL)
+     ========================================================= */
+  document.addEventListener("DOMContentLoaded", function () {
+    const scrollBtn = document.querySelector(".scroll-to-top");
+    if (!scrollBtn) return;
+
+    window.addEventListener(
+      "scroll",
+      debounce(function () {
+        if (window.scrollY > 400) {
+          scrollBtn.classList.add("visible");
+        } else {
+          scrollBtn.classList.remove("visible");
+        }
+      }, 100)
+    );
+
+    scrollBtn.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
   });
-}
 
-/* ---------- Helper: Add Class ---------- */
-function addClass(el, className) {
-  if (el && !el.classList.contains(className)) {
-    el.classList.add(className);
-  }
-}
-
-/* ---------- Helper: Remove Class ---------- */
-function removeClass(el, className) {
-  if (el && el.classList.contains(className)) {
-    el.classList.remove(className);
-  }
-}
-
-/* ---------- Helper: Toggle Class ---------- */
-function toggleClass(el, className) {
-  if (el) el.classList.toggle(className);
-}
+})();
