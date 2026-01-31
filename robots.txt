@@ -1,9 +1,19 @@
-# Robots.txt for Saima Qaiser Securities
-# Allow all crawlers access to public pages
+# =========================================================
+# Saima Qaiser Securities (Pvt) Ltd
+# robots.txt – 2026
+# Purpose:
+# - Control crawler access
+# - Allow Google/major search engines
+# - Prevent indexing of staging/private folders
+# =========================================================
 
 User-agent: *
-Disallow: /private/
+Disallow: /assets-original/
+Disallow: /drafts/
+Disallow: /wordpress-version/
+Disallow: /references/
+Disallow: /legal/
+
 Allow: /
 
-# Sitemap location (optional, if you generate sitemap.xml)
 Sitemap: https://saimaqaiser.com/sitemap.xml
