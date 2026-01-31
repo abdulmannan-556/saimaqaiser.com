@@ -1,9 +1,11 @@
-document.querySelectorAll(".dropdown").forEach(menu => {
-  menu.addEventListener("mouseenter", () => {
-    menu.querySelector(".dropdown-menu").style.display = "block";
+document.querySelectorAll(".dropdown").forEach(item => {
+  item.addEventListener("mouseenter", () => {
+    const menu = item.querySelector(".dropdown-menu");
+    if (menu) menu.style.display = "block";
   });
 
-  menu.addEventListener("mouseleave", () => {
-    menu.querySelector(".dropdown-menu").style.display = "none";
+  item.addEventListener("mouseleave", () => {
+    const menu = item.querySelector(".dropdown-menu");
+    if (menu) menu.style.display = "none";
   });
 });
