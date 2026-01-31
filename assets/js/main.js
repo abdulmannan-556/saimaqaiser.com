@@ -1,81 +1,80 @@
 /* =========================================================
    main.js
    Purpose:
-   - Shared JS for entire website
-   - Dropdowns, slider hooks, smooth scroll
-   - Security-conscious, modern ES6
+   - Global JavaScript logic
+   - Stock ticker behavior
+   - Safe DOM initialization
+   - No external dependencies
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  /* ---------- Mobile Hamburger Menu ---------- */
-  const hamburger = document.querySelector(".hamburger");
-  const navMenu = document.querySelector(".main-nav");
+(function () {
+  "use strict";
 
-  if (hamburger && navMenu) {
-    hamburger.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-      hamburger.classList.toggle("open");
-    });
+  /* =========================================================
+     DOM READY HELPER
+     ========================================================= */
+  function onReady(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
   }
 
-  /* ---------- Smooth Scroll for Internal Links ---------- */
-  const internalLinks = document.querySelectorAll('a[href^="#"]');
-  internalLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetID = link.getAttribute("href").substring(1);
-      const targetEl = document.getElementById(targetID);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  });
+  onReady(function () {
 
-  /* ---------- Slider Hook (used by slider.js) ---------- */
-  const sliders = document.querySelectorAll(".slider-container");
-  sliders.forEach(slider => {
-    let currentIndex = 0;
-    const slides = slider.querySelectorAll(".slider-slide");
-    const controls = slider.querySelectorAll(".slider-controls button");
+    /* =========================================================
+       STOCK TICKER LOGIC
+       ========================================================= */
 
-    const showSlide = (index) => {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-      });
-      controls.forEach((btn, i) => {
-        btn.classList.toggle("active", i === index);
-      });
-    };
+    const ticker = document.querySelector(".ticker-track");
 
-    if (controls.length > 0) {
-      controls.forEach((btn, i) => {
-        btn.addEventListener("click", () => {
-          currentIndex = i;
-          showSlide(currentIndex);
-        });
+    if (ticker) {
+      /*
+        Duplicate ticker items to ensure seamless infinite scroll
+        without visual gaps (no cloning from user input)
+      */
+      const items = Array.from(ticker.children);
+      items.forEach(function (item) {
+        const clone = item.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        ticker.appendChild(clone);
       });
     }
 
-    // Auto-rotate (optional)
-    if (slides.length > 1) {
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
-      }, 6000);
+    /* =========================================================
+       GLOBAL SAFETY: PREVENT EMPTY LINKS
+       ========================================================= */
+    const emptyLinks = document.querySelectorAll('a[href="#"]');
+    emptyLinks.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+      });
+    });
+
+    /* =========================================================
+       ACCESSIBILITY: KEYBOARD DROPDOWN SUPPORT
+       ========================================================= */
+    const dropdownParents = document.querySelectorAll(".has-dropdown");
+
+    dropdownParents.forEach(function (item) {
+      const link = item.querySelector("a");
+
+      if (!link) return;
+
+      link.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          item.classList.toggle("open");
+        }
+      });
+    });
+
+    /* =========================================================
+       FAIL-SAFE LOGGING (DEV ONLY)
+       ========================================================= */
+    if (location.hostname === "localhost") {
+      console.info("Main JS loaded successfully.");
     }
-
-    // Initialize
-    showSlide(currentIndex);
   });
-
-  /* ---------- Profile Hover Animation ---------- */
-  const profiles = document.querySelectorAll(".profile-image");
-  profiles.forEach(profile => {
-    profile.addEventListener("mouseenter", () => {
-      profile.style.transform = "scale(1.05)";
-    });
-    profile.addEventListener("mouseleave", () => {
-      profile.style.transform = "scale(1)";
-    });
-  });
-});
+})();
