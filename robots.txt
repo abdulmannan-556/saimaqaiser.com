@@ -1,1 +1,9 @@
+# Robots.txt for Saima Qaiser Securities
+# Allow all crawlers access to public pages
 
+User-agent: *
+Disallow: /private/
+Allow: /
+
+# Sitemap location (optional, if you generate sitemap.xml)
+Sitemap: https://saimaqaiser.com/sitemap.xml
