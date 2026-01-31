@@ -1,43 +1,242 @@
-body {
+/* =========================================================
+   main.css
+   Purpose:
+   - Global styles
+   - Typography system
+   - Base colors
+   - Layout foundations
+   - Security- & accessibility-friendly defaults
+   ========================================================= */
+
+/* ---------- CSS Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 30px;
-  border-bottom: 2px solid #2ecc71;
+/* ---------- Root Variables ---------- */
+:root {
+  /* Brand Colors */
+  --color-primary: #2ecc71;
+  --color-primary-dark: #27ae60;
+  --color-secondary: #0f172a;
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-100: #f8fafc;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #cbd5e1;
+  --color-gray-500: #64748b;
+  --color-gray-700: #334155;
+  --color-gray-900: #0f172a;
+
+  /* Typography */
+  --font-base: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+
+  /* Layout */
+  --container-width: 1200px;
+  --container-padding: 20px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.35s ease;
 }
 
-.nav ul {
+/* ---------- HTML & Body ---------- */
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  line-height: var(--line-height-base);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ---------- Images ---------- */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- Links ---------- */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* ---------- Lists ---------- */
+ul,
+ol {
   list-style: none;
-  display: flex;
-  gap: 20px;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+/* ---------- Buttons ---------- */
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
-.hero {
-  height: 70vh;
-  background: url("../images/hero/slider.jpg") center/cover;
-  color: white;
-  display: flex;
-  flex-direction: column;
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 12px 26px;
+  border-radius: 6px;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transition: background-color var(--transition-medium),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
 }
 
-.login-btn {
-  background: #2ecc71;
-  padding: 8px 14px;
-  color: white;
-  border-radius: 4px;
-  text-decoration: none;
+.btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Containers ---------- */
+.container {
+  max-width: var(--container-width);
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Page Structure ---------- */
+main {
+  min-height: 60vh;
+  padding: 60px 0;
+}
+
+/* ---------- Headings ---------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-secondary);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* ---------- Paragraphs ---------- */
+p {
+  color: var(--color-gray-700);
+  margin-top: 12px;
+}
+
+/* ---------- Utility Classes ---------- */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-40 { margin-bottom: 40px; }
+
+/* ---------- Profile Section Base ----------
+   Used for:
+   Abdul Mannan Butt
+   WordPress Frontend Developer
+------------------------------------------ */
+.profile {
+  text-align: center;
+}
+
+.profile-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 4px solid var(--color-primary);
+}
+
+.profile-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+.profile-title {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin-top: 6px;
+}
+
+/* ---------- Security-Oriented Defaults ---------- */
+/* Prevent accidental hidden elements */
+[hidden] {
+  display: none !important;
+}
+
+/* Disable pointer events on iframes if ever added */
+iframe {
+  pointer-events: none;
+}
+
+/* ---------- Print Safety ---------- */
+@media print {
+  body {
+    background: var(--color-white);
+    color: var(--color-black);
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 12px;
+  }
 }
