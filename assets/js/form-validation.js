@@ -1,69 +1,72 @@
 /* =========================================================
-   slider.js
+   form-validation.js
    Purpose:
-   - Homepage slider functionality
-   - Auto-slide & manual navigation
-   - Responsive & accessible
-   - Security-safe ES6
+   - Frontend validation for Contact & Feedback forms
+   - Error handling and success messages
+   - Secure, modern ES6
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const sliders = document.querySelectorAll(".slider-container");
+  const forms = document.querySelectorAll("form");
 
-  sliders.forEach(slider => {
-    const slides = slider.querySelectorAll(".slider-slide");
-    const controls = slider.querySelectorAll(".slider-controls button");
-    let currentIndex = 0;
-    let intervalId = null;
+  forms.forEach(form => {
+    form.addEventListener("submit", e => {
+      e.preventDefault();
 
-    const showSlide = (index) => {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-        slide.setAttribute("aria-hidden", i !== index);
+      let valid = true;
+
+      // Clear previous messages
+      form.querySelectorAll(".form-error").forEach(el => el.remove());
+
+      // Required fields
+      form.querySelectorAll("[required]").forEach(field => {
+        if (!field.value.trim()) {
+          showError(field, "This field is required");
+          valid = false;
+        }
       });
-      controls.forEach((btn, i) => {
-        btn.classList.toggle("active", i === index);
-        btn.setAttribute("aria-pressed", i === index);
+
+      // Email validation
+      const emailFields = form.querySelectorAll("input[type='email']");
+      emailFields.forEach(email => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email.value && !regex.test(email.value)) {
+          showError(email, "Invalid email address");
+          valid = false;
+        }
       });
-      currentIndex = index;
-    };
 
-    const nextSlide = () => {
-      showSlide((currentIndex + 1) % slides.length);
-    };
-
-    const startAutoSlide = () => {
-      intervalId = setInterval(nextSlide, 6000);
-    };
-
-    const stopAutoSlide = () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-
-    // Manual controls
-    controls.forEach((btn, i) => {
-      btn.addEventListener("click", () => {
-        showSlide(i);
-        stopAutoSlide();
-        startAutoSlide();
+      // Phone validation
+      const phoneFields = form.querySelectorAll("input[type='tel']");
+      phoneFields.forEach(phone => {
+        const regex = /^[0-9+\-\s]{7,15}$/;
+        if (phone.value && !regex.test(phone.value)) {
+          showError(phone, "Invalid phone number");
+          valid = false;
+        }
       });
-    });
 
-    // Keyboard accessibility
-    slider.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        nextSlide();
-        stopAutoSlide();
-        startAutoSlide();
-      } else if (e.key === "ArrowLeft") {
-        showSlide((currentIndex - 1 + slides.length) % slides.length);
-        stopAutoSlide();
-        startAutoSlide();
+      if (valid) {
+        showSuccess(form, "Form submitted successfully!");
+        form.reset();
       }
     });
-
-    // Initialize
-    showSlide(0);
-    startAutoSlide();
   });
+
+  function showError(field, message) {
+    const error = document.createElement("div");
+    error.className = "form-error";
+    error.textContent = message;
+    field.insertAdjacentElement("afterend", error);
+  }
+
+  function showSuccess(form, message) {
+    let success = form.querySelector(".form-success");
+    if (!success) {
+      success = document.createElement("div");
+      success.className = "form-success";
+      form.prepend(success);
+    }
+    success.textContent = message;
+  }
 });
