@@ -1,72 +1,58 @@
 /* =========================================================
    form-validation.js
    Purpose:
-   - Frontend validation for Contact & Feedback forms
-   - Error handling and success messages
-   - Secure, modern ES6
+   - Client-side validation for forms
+   - Contact & Feedback pages
+   - Prevent empty or malformed submissions
+   - Static-site safe (no backend)
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const forms = document.querySelectorAll("form");
+(function () {
+  "use strict";
 
-  forms.forEach(form => {
-    form.addEventListener("submit", e => {
-      e.preventDefault();
+  document.addEventListener("DOMContentLoaded", function () {
+    const forms = document.querySelectorAll("form[data-validate]");
 
-      let valid = true;
+    if (!forms.length) return;
 
-      // Clear previous messages
-      form.querySelectorAll(".form-error").forEach(el => el.remove());
+    forms.forEach(function (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-      // Required fields
-      form.querySelectorAll("[required]").forEach(field => {
-        if (!field.value.trim()) {
-          showError(field, "This field is required");
-          valid = false;
+        let isValid = true;
+        const fields = form.querySelectorAll("[required]");
+
+        fields.forEach(function (field) {
+          field.classList.remove("field-error");
+
+          if (!field.value.trim()) {
+            isValid = false;
+            field.classList.add("field-error");
+          }
+
+          if (field.type === "email") {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(field.value.trim())) {
+              isValid = false;
+              field.classList.add("field-error");
+            }
+          }
+        });
+
+        if (!isValid) {
+          alert("Please fill in all required fields correctly.");
+          const firstError = form.querySelector(".field-error");
+          if (firstError) firstError.focus();
+          return;
         }
-      });
 
-      // Email validation
-      const emailFields = form.querySelectorAll("input[type='email']");
-      emailFields.forEach(email => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email.value && !regex.test(email.value)) {
-          showError(email, "Invalid email address");
-          valid = false;
-        }
-      });
+        /* =========================================================
+           SUCCESS (STATIC SITE)
+           ========================================================= */
 
-      // Phone validation
-      const phoneFields = form.querySelectorAll("input[type='tel']");
-      phoneFields.forEach(phone => {
-        const regex = /^[0-9+\-\s]{7,15}$/;
-        if (phone.value && !regex.test(phone.value)) {
-          showError(phone, "Invalid phone number");
-          valid = false;
-        }
-      });
-
-      if (valid) {
-        showSuccess(form, "Form submitted successfully!");
+        alert("Thank you. Your submission has been received.");
         form.reset();
-      }
+      });
     });
   });
-
-  function showError(field, message) {
-    const error = document.createElement("div");
-    error.className = "form-error";
-    error.textContent = message;
-    field.insertAdjacentElement("afterend", error);
-  }
-
-  function showSuccess(form, message) {
-    let success = form.querySelector(".form-success");
-    if (!success) {
-      success = document.createElement("div");
-      success.className = "form-success";
-      form.prepend(success);
-    }
-    success.textContent = message;
-  }
-});
+})();
