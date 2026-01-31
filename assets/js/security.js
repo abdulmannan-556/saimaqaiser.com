@@ -1,44 +1,67 @@
 /* =========================================================
    security.js
    Purpose:
-   - Security enhancements for static website
-   - Sanitize user input to prevent XSS
-   - Safe DOM handling
+   - Frontend hardening for static websites
+   - Clickjacking protection
+   - Console abuse reduction
+   - Referrer & framing safety
+   - GitHub Pages compatible
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const forms = document.querySelectorAll("form");
+(function () {
+  "use strict";
 
-  forms.forEach(form => {
-    form.addEventListener("submit", e => {
-      // Sanitize all text inputs and textareas
-      form.querySelectorAll("input[type='text'], input[type='email'], input[type='tel'], textarea")
-        .forEach(field => {
-          field.value = sanitizeInput(field.value);
-        });
-    });
-  });
-
-  /**
-   * Sanitize input to escape HTML special characters
-   * @param {string} str
-   * @returns {string}
-   */
-  function sanitizeInput(str) {
-    return str
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#x27;")
-      .replace(/\//g, "&#x2F;");
+  /* =========================================================
+     PREVENT IFRAME EMBEDDING (CLICKJACKING)
+     ========================================================= */
+  try {
+    if (window.top !== window.self) {
+      window.top.location = window.self.location;
+    }
+  } catch (e) {
+    document.body.innerHTML = "";
   }
 
-  /* Prevent inline script injection via URL hash or search */
-  window.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.forEach((value, key) => {
-      urlParams.set(key, sanitizeInput(value));
-    });
+  /* =========================================================
+     DISABLE RIGHT-CLICK (OPTIONAL LIGHT PROTECTION)
+     ========================================================= */
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
   });
-});
+
+  /* =========================================================
+     BLOCK COMMON DEVTOOLS SHORTCUTS (NON-DESTRUCTIVE)
+     ========================================================= */
+  document.addEventListener("keydown", function (e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  /* =========================================================
+     CONSOLE WARNING (LEGAL + DETERRENCE)
+     ========================================================= */
+  if (window.console && console.log) {
+    console.log(
+      "%cSTOP!",
+      "color:red;font-size:48px;font-weight:bold;"
+    );
+    console.log(
+      "%cThis is a browser feature intended for developers.\nUnauthorized access or tampering is prohibited.",
+      "font-size:14px;"
+    );
+  }
+
+  /* =========================================================
+     REFERRER POLICY ENFORCEMENT (CLIENT-SIDE FALLBACK)
+     ========================================================= */
+  const metaReferrer = document.createElement("meta");
+  metaReferrer.name = "referrer";
+  metaReferrer.content = "strict-origin-when-cross-origin";
+  document.head.appendChild(metaReferrer);
+
+})();
