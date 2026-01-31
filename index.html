@@ -4,13 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdul Mannan Butt | Frontend Developer</title>
+
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-  <main class="hero">
-    <img 
-      src="assets/images/abdul-mannan-butt.jpg" 
+  <!-- HERO SECTION (Video-style) -->
+  <section class="hero">
+    <img
+      src="assets/images/abdul-mannan-butt.jpg"
       alt="Abdul Mannan Butt"
       class="profile-image"
     />
@@ -18,14 +20,45 @@
     <h1>Abdul Mannan Butt</h1>
     <h2>Frontend Developer</h2>
 
-    <p class="tagline">
-      Crafting modern, responsive, and scalable web experiences.
+    <p class="subtitle">
+      Frontend & WordPress Developer specializing in modern web interfaces
     </p>
 
-    <a href="disclaimer.html" class="disclaimer-link">
-      Disclaimer
-    </a>
-  </main>
+    <button class="disclaimer-btn" onclick="toggleDisclaimer()">
+      View Disclaimer
+    </button>
+  </section>
 
+  <!-- DISCLAIMER (Same Page) -->
+  <section id="disclaimer" class="disclaimer hidden">
+    <h3>Disclaimer</h3>
+
+    <p>
+      Abdul Mannan Butt has no affiliation with any unofficial pages, profiles,
+      apps, or WhatsApp numbers.
+    </p>
+
+    <p>
+      We never request OTPs, personal information, funds, or investments through
+      unofficial platforms.
+    </p>
+
+    <p>
+      All communication is conducted only through official channels.
+    </p>
+
+    <p>
+      Always verify the authenticity of any communication and ensure you are
+      dealing with licensed and registered professionals.
+    </p>
+
+    <p class="official">
+      Official Website: <strong>https://saimaqaiser.com</strong>
+    </p>
+
+    <button class="close-btn" onclick="toggleDisclaimer()">Close</button>
+  </section>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
