@@ -1,25 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Page Not Found | Saima Qaiser Securities</title>
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/animations.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 – Page Not Found | Saima Qaiser Securities</title>
+
+  <!-- SEO -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+
   <style>
-    body { display:flex; align-items:center; justify-content:center; height:100vh; text-align:center; font-family: 'Roboto', Arial, sans-serif; background:#f9f9f9; }
-    h1 { font-size:8rem; margin:0; color:#2c3e50; }
-    p { font-size:1.5rem; color:#555; margin:1rem 0; }
-    a.btn { display:inline-block; padding:12px 25px; background:#2ecc71; color:#fff; text-decoration:none; border-radius:5px; transition:0.3s; }
-    a.btn:hover { background:#27ae60; }
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f4f7fb, #ffffff);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .error-box {
+      max-width: 520px;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      color: #1f2d3d;
+      margin-bottom: 10px;
+    }
+
+    .error-title {
+      font-size: 1.8rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .error-text {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .error-actions a {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #2ecc71;
+      color: #ffffff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .error-actions a:hover {
+      background: #27ae60;
+    }
   </style>
 </head>
+
 <body>
-  <div class="error-container animate-fade-in-up">
-    <h1>404</h1>
-    <p>Oops! The page you are looking for does not exist.</p>
-    <a href="index.html" class="btn hover-glow">Go Back Home</a>
+
+<section class="error-page">
+  <div class="error-box">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-text">
+      The page you are looking for does not exist or may have been moved.
+      Please return to the homepage or contact us if you believe this is an error.
+    </p>
+
+    <div class="error-actions">
+      <a href="index.html">Back to Homepage</a>
+    </div>
+
+    <p style="margin-top:30px;font-size:0.85rem;color:#777;">
+      © 2026 Saima Qaiser Securities (Pvt) Ltd<br />
+      Frontend by <strong>Abdul Mannan Butt</strong>
+    </p>
   </div>
+</section>
+
 </body>
 </html>
