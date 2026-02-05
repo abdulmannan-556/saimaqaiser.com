@@ -1,88 +1,99 @@
-/* =========================================================
-   menu.js
-   Purpose:
-   - Primary navigation dropdown handling
-   - Hover + click support
-   - Keyboard accessibility
-   - Mobile-safe behavior
-   - No external libraries
-   ========================================================= */
+/**
+ * =========================================================
+ * menu.js
+ * Project: saimaqaiser.com
+ * Purpose:
+ * - Mobile navigation toggle
+ * - Dropdown menu interaction (mobile)
+ * - Desktop uses CSS hover
+ * =========================================================
+ */
 
 (function () {
   "use strict";
 
-  /* =========================================================
-     HELPER: CLOSE ALL DROPDOWNS
-     ========================================================= */
-  function closeAllDropdowns() {
-    document.querySelectorAll(".has-dropdown").forEach(function (item) {
-      item.classList.remove("open");
-    });
+  // Elements
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mainNav = document.querySelector(".main-nav");
+  const dropdowns = document.querySelectorAll(".dropdown");
+
+  /**
+   * Toggle mobile menu
+   */
+  function toggleMenu() {
+    if (!mainNav) return;
+    mainNav.classList.toggle("active");
   }
 
-  /* =========================================================
-     INITIALIZE MENU
-     ========================================================= */
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdownItems = document.querySelectorAll(".has-dropdown");
+  /**
+   * Close mobile menu
+   */
+  function closeMenu() {
+    if (!mainNav) return;
+    mainNav.classList.remove("active");
+  }
 
-    dropdownItems.forEach(function (item) {
-      const trigger = item.querySelector("a");
-      const menu = item.querySelector(".dropdown");
+  /**
+   * Handle dropdown click (mobile only)
+   */
+  function handleDropdownClick(event) {
+    const screenWidth = window.innerWidth;
 
-      if (!trigger || !menu) return;
+    // Desktop: do nothing (CSS hover)
+    if (screenWidth > 992) return;
 
-      /* ---------- Desktop: hover ---------- */
-      item.addEventListener("mouseenter", function () {
-        item.classList.add("open");
-      });
+    event.preventDefault();
 
-      item.addEventListener("mouseleave", function () {
-        item.classList.remove("open");
-      });
+    const dropdown = event.currentTarget;
+    const isActive = dropdown.classList.contains("active");
 
-      /* ---------- Mobile: click ---------- */
-      trigger.addEventListener("click", function (e) {
-        const isMobile = window.innerWidth <= 992;
+    // Close all dropdowns first
+    dropdowns.forEach((d) => d.classList.remove("active"));
 
-        if (isMobile) {
-          e.preventDefault();
+    // Toggle current
+    if (!isActive) {
+      dropdown.classList.add("active");
+    }
+  }
 
-          const isOpen = item.classList.contains("open");
-          closeAllDropdowns();
+  /**
+   * Close menu on resize to desktop
+   */
+  function handleResize() {
+    if (window.innerWidth > 992) {
+      closeMenu();
+      dropdowns.forEach((d) => d.classList.remove("active"));
+    }
+  }
 
-          if (!isOpen) {
-            item.classList.add("open");
-          }
-        }
-      });
+  /**
+   * Event bindings
+   */
+  if (menuToggle) {
+    menuToggle.addEventListener("click", toggleMenu);
+  }
 
-      /* ---------- Keyboard accessibility ---------- */
-      trigger.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          item.classList.toggle("open");
-        }
+  dropdowns.forEach((dropdown) => {
+    const link = dropdown.querySelector("a");
+    if (link) {
+      link.addEventListener("click", handleDropdownClick);
+    }
+  });
 
-        if (e.key === "Escape") {
-          item.classList.remove("open");
-          trigger.blur();
-        }
-      });
-    });
+  window.addEventListener("resize", handleResize);
 
-    /* ---------- Close dropdowns on outside click ---------- */
-    document.addEventListener("click", function (e) {
-      if (!e.target.closest(".has-dropdown")) {
-        closeAllDropdowns();
-      }
-    });
+  /**
+   * Close menu when clicking outside (mobile)
+   */
+  document.addEventListener("click", function (event) {
+    if (!mainNav || !menuToggle) return;
 
-    /* ---------- Close dropdowns on resize ---------- */
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 992) {
-        closeAllDropdowns();
-      }
-    });
+    if (
+      !mainNav.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+      closeMenu();
+      dropdowns.forEach((d) => d.classList.remove("active"));
+    }
   });
 })();
