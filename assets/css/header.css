@@ -1,159 +1,158 @@
 /* =========================================================
    header.css
+   Project: SaimaQaiser.com
    Purpose:
-   - Site header
-   - Main navigation
-   - Dropdown menus (video-accurate)
-   - Clean corporate styling
+   - Header layout
+   - Navigation menu
+   - Dropdown menus
+   - Mobile responsiveness
    ========================================================= */
 
-/* ---------- Header Wrapper ---------- */
+/* ---------------- HEADER WRAPPER ---------------- */
 .site-header {
-  width: 100%;
-  background-color: #ffffff;
-  border-bottom: 2px solid var(--color-primary);
   position: sticky;
   top: 0;
   z-index: 1000;
+  background-color: #0b3c5d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* ---------- Header Inner ---------- */
-.site-header .header-inner {
-  max-width: var(--container-width);
+.header-container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 12px var(--container-padding);
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* ---------- Logo ---------- */
-.site-header .logo img {
-  height: 56px;
+/* ---------------- LOGO ---------------- */
+.site-logo img {
+  height: 48px;
   width: auto;
 }
 
-/* ---------- Navigation ---------- */
+/* ---------------- NAVIGATION ---------------- */
 .main-nav {
   display: flex;
   align-items: center;
 }
 
-.main-nav > ul {
+.main-nav ul {
+  list-style: none;
   display: flex;
-  gap: 22px;
+  gap: 26px;
 }
 
-/* ---------- Nav Links ---------- */
-.main-nav a {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-secondary);
-  padding: 8px 4px;
-  transition: color var(--transition-fast);
-}
-
-.main-nav a:hover {
-  color: var(--color-primary);
-}
-
-/* ---------- Dropdown Container ---------- */
-.main-nav .dropdown {
+.main-nav li {
   position: relative;
 }
 
-/* ---------- Dropdown Arrow ---------- */
-.main-nav .dropdown > a::after {
+.main-nav a {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 4px;
+  display: inline-block;
+}
+
+.main-nav a:hover {
+  color: #2ecc71;
+}
+
+/* ---------------- DROPDOWN ---------------- */
+.dropdown > a::after {
   content: "▾";
-  font-size: 0.7rem;
+  font-size: 12px;
   margin-left: 6px;
 }
 
-/* ---------- Dropdown Menu ---------- */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 0;
-  min-width: 220px;
   background-color: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity var(--transition-fast),
-              transform var(--transition-fast),
-              visibility var(--transition-fast);
+  min-width: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 10px 0;
+  display: none;
+  z-index: 999;
 }
 
-/* ---------- Dropdown Items ---------- */
-.dropdown-menu li a {
-  display: block;
+.dropdown-menu a {
+  color: #1a1a1a;
   padding: 10px 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--color-gray-700);
-  white-space: nowrap;
+  display: block;
+  font-size: 14px;
 }
 
-.dropdown-menu li a:hover {
-  background-color: var(--color-gray-100);
-  color: var(--color-primary);
+.dropdown-menu a:hover {
+  background-color: #f1f5f9;
+  color: #0b3c5d;
 }
 
-/* ---------- Show Dropdown on Hover ---------- */
-.main-nav .dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
-/* ---------- Header Actions (Search + Login) ---------- */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* ---------- Search Input ---------- */
-.header-actions input[type="search"] {
-  padding: 8px 10px;
-  font-size: 0.85rem;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 4px;
-  outline: none;
-  transition: border-color var(--transition-fast),
-              box-shadow var(--transition-fast);
-}
-
-.header-actions input[type="search"]:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.15);
-}
-
-/* ---------- Login Button ---------- */
-.header-actions .login-btn {
-  padding: 8px 16px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  background-color: var(--color-primary);
+/* ---------------- MOBILE MENU ---------------- */
+.menu-toggle {
+  display: none;
+  font-size: 22px;
   color: #ffffff;
-  border-radius: 4px;
-  transition: background-color var(--transition-fast),
-              box-shadow var(--transition-fast),
-              transform var(--transition-fast);
+  cursor: pointer;
 }
 
-.header-actions .login-btn:hover {
-  background-color: var(--color-primary-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+  }
 
-/* ---------- Accessibility ---------- */
-.main-nav a:focus-visible,
-.header-actions input:focus-visible,
-.header-actions .login-btn:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0b3c5d;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .main-nav li {
+    width: 100%;
+  }
+
+  .main-nav a {
+    padding: 14px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background-color: #0f4c75;
+  }
+
+  .dropdown-menu a {
+    color: #ffffff;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: none;
+  }
+
+  .dropdown.active .dropdown-menu {
+    display: block;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
 }
