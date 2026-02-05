@@ -1,171 +1,143 @@
 /* =========================================================
    home.css
+   Project: saimaqaiser.com
    Purpose:
-   - Home page layout
-   - Hero section with profile
-   - Slider section
-   - CTA sections
-   - Animations integrated
+   - Homepage-specific styles
+   - Hero section
+   - Profile image + title
+   - Ticker spacing
    ========================================================= */
 
-/* ---------- Hero Section ---------- */
-.hero-section {
-  position: relative;
-  background-color: var(--color-gray-100);
-  padding: 100px 0 60px;
-  text-align: center;
+/* ---------------- HERO SECTION ---------------- */
+.hero {
+  background: linear-gradient(
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.85)
+    ),
+    url("../images/hero/hero-bg.jpg") center/cover no-repeat;
+  padding: 140px 0 100px;
+  color: #ffffff;
 }
 
-.hero-section .hero-inner {
-  max-width: var(--container-width);
+.hero-container {
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  text-align: center;
+  padding: 0 20px;
 }
 
-/* ---------- Profile Image ---------- */
+/* ---------------- PROFILE IMAGE ---------------- */
 .hero-profile {
   margin-bottom: 20px;
 }
 
 .hero-profile img {
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid var(--color-primary);
-  animation: scaleIn 0.8s var(--ease-out-soft) forwards;
+  border: 4px solid #2ecc71;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* ---------- Profile Name & Title ---------- */
-.hero-name {
-  font-size: 2.4rem;
+/* ---------------- HERO TEXT ---------------- */
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
   font-weight: 700;
-  color: var(--color-secondary);
-  margin-bottom: 6px;
 }
 
-.hero-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin-bottom: 30px;
+.hero h1 span {
+  color: #2ecc71;
 }
 
-/* ---------- Hero Subtitle / Tagline ---------- */
-.hero-subtitle {
-  font-size: 1rem;
-  color: var(--color-gray-700);
-  max-width: 720px;
-  margin: 0 auto;
-  line-height: 1.6;
+.hero h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #cbd5e1;
+  margin-bottom: 25px;
 }
 
-/* ---------- CTA Buttons ---------- */
-.hero-cta {
-  margin-top: 30px;
+/* ---------------- HERO CTA ---------------- */
+.hero-actions {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.hero-cta .btn {
-  min-width: 140px;
+/* ---------------- STOCK TICKER GAP ---------------- */
+.ticker-wrapper {
+  margin-top: 60px;
 }
 
-/* ---------- Slider Section ---------- */
-.slider-section {
-  margin-top: 80px;
-  position: relative;
+/* ---------------- SECTIONS BELOW HERO ---------------- */
+.home-section {
+  padding: 70px 0;
 }
 
-.slider-container {
-  position: relative;
-  overflow: hidden;
+.home-section.light {
+  background-color: #f8fafc;
 }
 
-.slider-slide {
-  width: 100%;
-  display: none;
-  transition: opacity 0.6s ease-in-out;
+.home-section.dark {
+  background-color: #0f172a;
+  color: #ffffff;
 }
 
-.slider-slide.active {
-  display: block;
-  animation: fadeIn 0.8s var(--ease-out-soft) forwards;
+/* ---------------- FEATURE GRID ---------------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
 }
 
-/* ---------- Slider Controls ---------- */
-.slider-controls {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
+.feature-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.slider-controls button {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: var(--color-gray-300);
-  border: none;
-  cursor: pointer;
-  transition: background-color var(--transition-fast);
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
 }
 
-.slider-controls button.active {
-  background-color: var(--color-primary);
+.feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
 }
 
-/* ---------- CTA Sections ---------- */
-.cta-section {
-  padding: 60px 0;
-  background-color: var(--color-gray-100);
-  text-align: center;
-  border-top: 1px solid var(--color-gray-200);
+.feature-card p {
+  font-size: 14px;
+  color: #6b7280;
 }
 
-.cta-section h2 {
-  font-size: 1.8rem;
-  color: var(--color-secondary);
-  margin-bottom: 16px;
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 992px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
 }
 
-.cta-section p {
-  font-size: 1rem;
-  color: var(--color-gray-700);
-  max-width: 680px;
-  margin: 0 auto 24px;
-}
+@media (max-width: 576px) {
+  .hero {
+    padding: 120px 0 80px;
+  }
 
-/* ---------- Accessibility ---------- */
-.hero-section a:focus-visible,
-.cta-section a:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* ---------- Responsive Home ---------- */
-@media (max-width: 768px) {
-  .hero-section {
-    padding: 60px 0 40px;
+  .feature-grid {
+    grid-template-columns: 1fr;
   }
 
   .hero-profile img {
-    width: 140px;
-    height: 140px;
-  }
-
-  .hero-name {
-    font-size: 1.8rem;
-  }
-
-  .hero-title {
-    font-size: 1rem;
-  }
-
-  .cta-section {
-    padding: 40px 0;
+    width: 110px;
+    height: 110px;
   }
 }
