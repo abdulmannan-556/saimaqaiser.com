@@ -1,99 +1,99 @@
-/**
- * =========================================================
- * menu.js
- * Project: saimaqaiser.com
- * Purpose:
- * - Mobile navigation toggle
- * - Dropdown menu interaction (mobile)
- * - Desktop uses CSS hover
- * =========================================================
- */
+/* =========================================================
+   menu.js
+   Project: saimaqaiser.com
+   Purpose:
+   - Responsive navigation menu
+   - Mobile toggle behavior
+   - Accessibility (ARIA + keyboard)
+   ========================================================= */
 
 (function () {
   "use strict";
 
-  // Elements
-  const menuToggle = document.querySelector(".menu-toggle");
-  const mainNav = document.querySelector(".main-nav");
-  const dropdowns = document.querySelectorAll(".dropdown");
-
-  /**
-   * Toggle mobile menu
-   */
-  function toggleMenu() {
-    if (!mainNav) return;
-    mainNav.classList.toggle("active");
-  }
-
-  /**
-   * Close mobile menu
-   */
-  function closeMenu() {
-    if (!mainNav) return;
-    mainNav.classList.remove("active");
-  }
-
-  /**
-   * Handle dropdown click (mobile only)
-   */
-  function handleDropdownClick(event) {
-    const screenWidth = window.innerWidth;
-
-    // Desktop: do nothing (CSS hover)
-    if (screenWidth > 992) return;
-
-    event.preventDefault();
-
-    const dropdown = event.currentTarget;
-    const isActive = dropdown.classList.contains("active");
-
-    // Close all dropdowns first
-    dropdowns.forEach((d) => d.classList.remove("active"));
-
-    // Toggle current
-    if (!isActive) {
-      dropdown.classList.add("active");
+  /* ---------------------------------------------------------
+     DOM READY HELPER
+  --------------------------------------------------------- */
+  function onReady(fn) {
+    if (document.readyState !== "loading") {
+      fn();
+    } else {
+      document.addEventListener("DOMContentLoaded", fn);
     }
   }
 
-  /**
-   * Close menu on resize to desktop
-   */
-  function handleResize() {
-    if (window.innerWidth > 992) {
-      closeMenu();
-      dropdowns.forEach((d) => d.classList.remove("active"));
+  /* ---------------------------------------------------------
+     MOBILE MENU INITIALIZATION
+  --------------------------------------------------------- */
+  function initMenu() {
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".site-nav");
+
+    if (!toggle || !nav) return;
+
+    // ARIA defaults
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", "primary-navigation");
+
+    function openMenu() {
+      nav.classList.add("open");
+      toggle.classList.add("active");
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.classList.add("menu-open");
     }
+
+    function closeMenu() {
+      nav.classList.remove("open");
+      toggle.classList.remove("active");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    }
+
+    function toggleMenu() {
+      if (nav.classList.contains("open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    // Click toggle
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Click outside closes menu
+    document.addEventListener("click", function (e) {
+      if (
+        nav.classList.contains("open") &&
+        !nav.contains(e.target) &&
+        !toggle.contains(e.target)
+      ) {
+        closeMenu();
+      }
+    });
+
+    // ESC key closes menu
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    // Close menu on link click (mobile UX)
+    const links = nav.querySelectorAll("a");
+    links.forEach(function (link) {
+      link.addEventListener("click", function () {
+        closeMenu();
+      });
+    });
   }
 
-  /**
-   * Event bindings
-   */
-  if (menuToggle) {
-    menuToggle.addEventListener("click", toggleMenu);
-  }
-
-  dropdowns.forEach((dropdown) => {
-    const link = dropdown.querySelector("a");
-    if (link) {
-      link.addEventListener("click", handleDropdownClick);
-    }
-  });
-
-  window.addEventListener("resize", handleResize);
-
-  /**
-   * Close menu when clicking outside (mobile)
-   */
-  document.addEventListener("click", function (event) {
-    if (!mainNav || !menuToggle) return;
-
-    if (
-      !mainNav.contains(event.target) &&
-      !menuToggle.contains(event.target)
-    ) {
-      closeMenu();
-      dropdowns.forEach((d) => d.classList.remove("active"));
-    }
+  /* ---------------------------------------------------------
+     INITIALIZE
+  --------------------------------------------------------- */
+  onReady(function () {
+    initMenu();
   });
 })();
