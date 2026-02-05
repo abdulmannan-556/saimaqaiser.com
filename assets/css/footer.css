@@ -1,101 +1,109 @@
 /* =========================================================
    footer.css
+   Project: saimaqaiser.com
    Purpose:
-   - Site footer styling
-   - Partner / regulator logos
-   - Legal text and links
-   - Clean corporate appearance
+   - Footer layout
+   - Legal & quick links
+   - Corporate styling
    ========================================================= */
 
-/* ---------- Footer Wrapper ---------- */
+/* ---------------- FOOTER WRAPPER ---------------- */
 .site-footer {
-  background-color: var(--color-secondary);
-  color: var(--color-gray-200);
-  padding: 50px 0 30px;
-  margin-top: 80px;
+  background-color: #0f172a;
+  color: #cbd5e1;
+  padding: 60px 0 30px;
+  font-size: 14px;
 }
 
-/* ---------- Footer Inner ---------- */
-.site-footer .footer-inner {
-  max-width: var(--container-width);
+.footer-container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--container-padding);
-  text-align: center;
+  padding: 0 20px;
 }
 
-/* ---------- Partner / Regulator Logos ---------- */
-.footer-logos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  margin-bottom: 30px;
+/* ---------------- FOOTER GRID ---------------- */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
 }
 
-.footer-logos img {
-  height: 48px;
-  width: auto;
-  filter: grayscale(100%);
-  opacity: 0.85;
-  transition: filter var(--transition-fast),
-              opacity var(--transition-fast),
-              transform var(--transition-fast);
+.footer-column h4 {
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 14px;
 }
 
-.footer-logos img:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-/* ---------- Footer Text ---------- */
-.site-footer p {
-  font-size: 0.85rem;
+.footer-column p {
+  font-size: 14px;
+  color: #cbd5e1;
   line-height: 1.6;
-  color: var(--color-gray-300);
-  margin-top: 12px;
 }
 
-/* ---------- Footer Links ---------- */
-.site-footer a {
-  color: var(--color-gray-200);
-  font-weight: 500;
-  transition: color var(--transition-fast);
+/* ---------------- FOOTER LINKS ---------------- */
+.footer-links {
+  list-style: none;
+  padding: 0;
 }
 
-.site-footer a:hover {
-  color: var(--color-primary);
+.footer-links li {
+  margin-bottom: 8px;
 }
 
-/* ---------- Divider ---------- */
-.footer-divider {
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin: 28px 0;
+.footer-links a {
+  color: #cbd5e1;
+  transition: color 0.2s ease;
 }
 
-/* ---------- Disclaimer Link ---------- */
-.footer-disclaimer {
-  display: inline-block;
-  font-size: 0.8rem;
-  margin-top: 10px;
+.footer-links a:hover {
+  color: #2ecc71;
 }
 
-/* ---------- Accessibility ---------- */
-.site-footer a:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
+/* ---------------- FOOTER BRAND ---------------- */
+.footer-brand img {
+  height: 42px;
+  margin-bottom: 12px;
 }
 
-/* ---------- Responsive Footer ---------- */
-@media (max-width: 768px) {
-  .footer-logos {
-    gap: 18px;
+/* ---------------- FOOTER BOTTOM ---------------- */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.footer-bottom a {
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.footer-bottom a:hover {
+  color: #2ecc71;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 
-  .footer-logos img {
-    height: 40px;
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
   }
 }
