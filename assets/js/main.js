@@ -1,14 +1,12 @@
-/**
- * =========================================================
- * main.js
- * Project: saimaqaiser.com
- * Purpose:
- * - Global JS bootstrap
- * - Stock ticker engine (static data)
- * - Animation helpers
- * - Safe for GitHub Pages
- * =========================================================
- */
+/* =========================================================
+   main.js
+   Project: saimaqaiser.com
+   Purpose:
+   - Core site initialization
+   - Stock ticker logic
+   - Global UI helpers
+   - Safe DOM handling
+   ========================================================= */
 
 (function () {
   "use strict";
@@ -25,95 +23,83 @@
   }
 
   /* ---------------------------------------------------------
-     STOCK TICKER DATA (STATIC – AS PROVIDED)
+     STOCK TICKER (INFINITE SMOOTH LOOP)
+     Matches reference video behavior
   --------------------------------------------------------- */
-  const STOCKS = [
-    { symbol: "KEL", price: "7.12", change: "-0.02" },
-    { symbol: "BOP", price: "39.53", change: "-0.65" },
-    { symbol: "PTC", price: "60.43", change: "+1.55" },
-    { symbol: "FCCL", price: "56.16", change: "+0.89" },
-    { symbol: "OGDC", price: "321.81", change: "+2.12" },
-    { symbol: "HBL", price: "336.89", change: "+7.01" },
-    { symbol: "LUCK", price: "465.43", change: "+16.70" },
-    { symbol: "MEBL", price: "477.16", change: "+11.51" }
-  ];
-
-  /* ---------------------------------------------------------
-     CREATE TICKER HTML
-  --------------------------------------------------------- */
-  function buildTicker(container) {
-    const track = document.createElement("div");
-    track.className = "ticker-track";
-
-    // Duplicate data to create seamless loop
-    const data = STOCKS.concat(STOCKS);
-
-    data.forEach((stock) => {
-      const item = document.createElement("div");
-      item.className = "ticker-item";
-
-      const changeClass =
-        stock.change.startsWith("-") ? "negative" : "positive";
-
-      item.innerHTML = `
-        <span class="symbol">${stock.symbol}</span>
-        <span class="price">${stock.price}</span>
-        <span class="change ${changeClass}">
-          ${stock.change}
-        </span>
-      `;
-
-      track.appendChild(item);
-    });
-
-    container.appendChild(track);
-  }
-
-  /* ---------------------------------------------------------
-     INIT TICKER
-  --------------------------------------------------------- */
-  function initTicker() {
+  function initStockTicker() {
     const ticker = document.querySelector(".stock-ticker");
     if (!ticker) return;
 
-    buildTicker(ticker);
+    const track = ticker.querySelector(".ticker-track");
+    if (!track) return;
+
+    // Duplicate content for seamless scrolling
+    const originalContent = track.innerHTML;
+    track.innerHTML += originalContent;
+
+    // Pause on hover handled in CSS
   }
 
   /* ---------------------------------------------------------
-     SCROLL TO TOP BUTTON (OPTIONAL FUTURE USE)
+     SCROLL SHADOW FOR HEADER (PROFESSIONAL TOUCH)
   --------------------------------------------------------- */
-  function initScrollHelpers() {
-    const scrollBtn = document.querySelector(".scroll-to-top");
-    if (!scrollBtn) return;
+  function initHeaderScroll() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
 
-    window.addEventListener("scroll", () => {
-      scrollBtn.classList.toggle("visible", window.scrollY > 300);
-    });
-
-    scrollBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (window.scrollY > 20) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      },
+      { passive: true }
+    );
   }
 
   /* ---------------------------------------------------------
-     ANIMATION TRIGGER (ON LOAD)
+     SMOOTH SCROLL FOR INTERNAL LINKS
   --------------------------------------------------------- */
-  function initAnimations() {
-    const animated = document.querySelectorAll("[data-animate]");
-    animated.forEach((el, index) => {
-      const delay = el.dataset.delay || index * 100;
-      setTimeout(() => {
-        el.classList.add(el.dataset.animate);
-      }, delay);
+  function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+
+    links.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        if (targetId.length <= 1) return;
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        e.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
     });
   }
 
   /* ---------------------------------------------------------
-     BOOTSTRAP
+     IMAGE SAFETY (PREVENT DRAGGING)
+  --------------------------------------------------------- */
+  function lockImages() {
+    const images = document.querySelectorAll("img");
+    images.forEach(function (img) {
+      img.setAttribute("draggable", "false");
+    });
+  }
+
+  /* ---------------------------------------------------------
+     INITIALIZE EVERYTHING
   --------------------------------------------------------- */
   onReady(function () {
-    initTicker();
-    initScrollHelpers();
-    initAnimations();
+    initStockTicker();
+    initHeaderScroll();
+    initSmoothScroll();
+    lockImages();
   });
 })();
