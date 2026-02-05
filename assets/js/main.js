@@ -1,80 +1,119 @@
-/* =========================================================
-   main.js
-   Purpose:
-   - Global JavaScript logic
-   - Stock ticker behavior
-   - Safe DOM initialization
-   - No external dependencies
-   ========================================================= */
+/**
+ * =========================================================
+ * main.js
+ * Project: saimaqaiser.com
+ * Purpose:
+ * - Global JS bootstrap
+ * - Stock ticker engine (static data)
+ * - Animation helpers
+ * - Safe for GitHub Pages
+ * =========================================================
+ */
 
 (function () {
   "use strict";
 
-  /* =========================================================
+  /* ---------------------------------------------------------
      DOM READY HELPER
-     ========================================================= */
+  --------------------------------------------------------- */
   function onReady(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn);
-    } else {
+    if (document.readyState !== "loading") {
       fn();
+    } else {
+      document.addEventListener("DOMContentLoaded", fn);
     }
   }
 
+  /* ---------------------------------------------------------
+     STOCK TICKER DATA (STATIC – AS PROVIDED)
+  --------------------------------------------------------- */
+  const STOCKS = [
+    { symbol: "KEL", price: "7.12", change: "-0.02" },
+    { symbol: "BOP", price: "39.53", change: "-0.65" },
+    { symbol: "PTC", price: "60.43", change: "+1.55" },
+    { symbol: "FCCL", price: "56.16", change: "+0.89" },
+    { symbol: "OGDC", price: "321.81", change: "+2.12" },
+    { symbol: "HBL", price: "336.89", change: "+7.01" },
+    { symbol: "LUCK", price: "465.43", change: "+16.70" },
+    { symbol: "MEBL", price: "477.16", change: "+11.51" }
+  ];
+
+  /* ---------------------------------------------------------
+     CREATE TICKER HTML
+  --------------------------------------------------------- */
+  function buildTicker(container) {
+    const track = document.createElement("div");
+    track.className = "ticker-track";
+
+    // Duplicate data to create seamless loop
+    const data = STOCKS.concat(STOCKS);
+
+    data.forEach((stock) => {
+      const item = document.createElement("div");
+      item.className = "ticker-item";
+
+      const changeClass =
+        stock.change.startsWith("-") ? "negative" : "positive";
+
+      item.innerHTML = `
+        <span class="symbol">${stock.symbol}</span>
+        <span class="price">${stock.price}</span>
+        <span class="change ${changeClass}">
+          ${stock.change}
+        </span>
+      `;
+
+      track.appendChild(item);
+    });
+
+    container.appendChild(track);
+  }
+
+  /* ---------------------------------------------------------
+     INIT TICKER
+  --------------------------------------------------------- */
+  function initTicker() {
+    const ticker = document.querySelector(".stock-ticker");
+    if (!ticker) return;
+
+    buildTicker(ticker);
+  }
+
+  /* ---------------------------------------------------------
+     SCROLL TO TOP BUTTON (OPTIONAL FUTURE USE)
+  --------------------------------------------------------- */
+  function initScrollHelpers() {
+    const scrollBtn = document.querySelector(".scroll-to-top");
+    if (!scrollBtn) return;
+
+    window.addEventListener("scroll", () => {
+      scrollBtn.classList.toggle("visible", window.scrollY > 300);
+    });
+
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     ANIMATION TRIGGER (ON LOAD)
+  --------------------------------------------------------- */
+  function initAnimations() {
+    const animated = document.querySelectorAll("[data-animate]");
+    animated.forEach((el, index) => {
+      const delay = el.dataset.delay || index * 100;
+      setTimeout(() => {
+        el.classList.add(el.dataset.animate);
+      }, delay);
+    });
+  }
+
+  /* ---------------------------------------------------------
+     BOOTSTRAP
+  --------------------------------------------------------- */
   onReady(function () {
-
-    /* =========================================================
-       STOCK TICKER LOGIC
-       ========================================================= */
-
-    const ticker = document.querySelector(".ticker-track");
-
-    if (ticker) {
-      /*
-        Duplicate ticker items to ensure seamless infinite scroll
-        without visual gaps (no cloning from user input)
-      */
-      const items = Array.from(ticker.children);
-      items.forEach(function (item) {
-        const clone = item.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        ticker.appendChild(clone);
-      });
-    }
-
-    /* =========================================================
-       GLOBAL SAFETY: PREVENT EMPTY LINKS
-       ========================================================= */
-    const emptyLinks = document.querySelectorAll('a[href="#"]');
-    emptyLinks.forEach(function (link) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-      });
-    });
-
-    /* =========================================================
-       ACCESSIBILITY: KEYBOARD DROPDOWN SUPPORT
-       ========================================================= */
-    const dropdownParents = document.querySelectorAll(".has-dropdown");
-
-    dropdownParents.forEach(function (item) {
-      const link = item.querySelector("a");
-
-      if (!link) return;
-
-      link.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          item.classList.toggle("open");
-        }
-      });
-    });
-
-    /* =========================================================
-       FAIL-SAFE LOGGING (DEV ONLY)
-       ========================================================= */
-    if (location.hostname === "localhost") {
-      console.info("Main JS loaded successfully.");
-    }
+    initTicker();
+    initScrollHelpers();
+    initAnimations();
   });
 })();
