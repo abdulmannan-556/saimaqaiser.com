@@ -1,107 +1,148 @@
 /* =========================================================
    forms.css
+   Project: SaimaQaiser.com
    Purpose:
-   - Form styling for contact and feedback pages
-   - Input fields, labels, buttons
-   - Error messages
-   - Responsive and accessible
+   - Contact & feedback forms
+   - Input fields
+   - Validation states
+   - Professional corporate styling
    ========================================================= */
 
-/* ---------- Form Wrapper ---------- */
-form {
-  max-width: 600px;
-  margin: 0 auto 40px;
-  padding: 20px;
-  background-color: var(--color-gray-100);
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+/* -------------------- FORM WRAPPER -------------------- */
+.form-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* ---------- Form Fields ---------- */
-form label {
+/* -------------------- FORM GROUP -------------------- */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
   display: block;
-  font-weight: 600;
   margin-bottom: 6px;
-  color: var(--color-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1f2d3d;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="tel"],
-form textarea,
-form select {
+/* -------------------- INPUTS -------------------- */
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 4px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
   font-size: 0.95rem;
-  margin-bottom: 16px;
-  background-color: var(--color-white);
-  transition: border-color var(--transition-fast),
-              box-shadow var(--transition-fast);
+  color: #1f2933;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-form input:focus,
-form textarea:focus,
-form select:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.15);
-  outline: none;
-}
-
-/* ---------- Textarea ---------- */
-textarea {
+.form-group textarea {
   resize: vertical;
   min-height: 120px;
 }
 
-/* ---------- Form Buttons ---------- */
-form .btn {
-  display: inline-block;
-  background-color: var(--color-primary);
-  color: #ffffff;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 6px;
-  transition: background-color var(--transition-fast),
-              transform var(--transition-fast),
-              box-shadow var(--transition-fast);
+/* -------------------- INPUT FOCUS -------------------- */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+  outline: none;
 }
 
-form .btn:hover {
-  background-color: var(--color-primary-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-/* ---------- Error / Validation Messages ---------- */
-.form-error {
-  color: #e74c3c;
-  font-size: 0.85rem;
-  margin-top: -12px;
-  margin-bottom: 12px;
-}
-
-/* ---------- Success Messages ---------- */
-.form-success {
-  color: var(--color-primary);
+/* -------------------- PLACEHOLDERS -------------------- */
+::placeholder {
+  color: #9ca3af;
   font-size: 0.9rem;
-  margin-bottom: 16px;
+}
+
+/* -------------------- FORM BUTTON -------------------- */
+.form-submit {
+  display: inline-block;
+  padding: 14px 36px;
+  background-color: #0b3c5d;
+  color: #ffffff;
+  font-size: 0.95rem;
   font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
 }
 
-/* ---------- Accessibility ---------- */
-form input:focus-visible,
-form textarea:focus-visible,
-form select:focus-visible,
-form .btn:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+.form-submit:hover {
+  background-color: #1d6fa5;
+  transform: translateY(-1px);
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 768px) {
-  form {
-    padding: 16px;
+/* -------------------- FORM HELP TEXT -------------------- */
+.form-help {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* -------------------- VALIDATION STATES -------------------- */
+.input-success {
+  border-color: #2ecc71 !important;
+}
+
+.input-error {
+  border-color: #e74c3c !important;
+}
+
+.error-message {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #e74c3c;
+}
+
+/* -------------------- CHECKBOX & RADIO -------------------- */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.form-check input {
+  width: 18px;
+  height: 18px;
+}
+
+.form-check label {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* -------------------- FORM NOTICE -------------------- */
+.form-notice {
+  background-color: #f8fafc;
+  border-left: 4px solid #2ecc71;
+  padding: 14px 18px;
+  font-size: 0.85rem;
+  color: #374151;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* -------------------- RESPONSIVE -------------------- */
+@media (max-width: 600px) {
+  .form-wrapper {
+    padding: 25px 20px;
+  }
+
+  .form-submit {
+    width: 100%;
+    text-align: center;
   }
 }
