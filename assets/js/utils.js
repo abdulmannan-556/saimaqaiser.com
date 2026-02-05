@@ -1,73 +1,117 @@
-/* =========================================================
-   utils.js
-   Purpose:
-   - Shared helper utilities
-   - Performance-safe helpers
-   - DOM utilities
-   - Used across pages where needed
-   ========================================================= */
+/**
+ * =========================================================
+ * utils.js
+ * Project: saimaqaiser.com
+ * Purpose:
+ * - Shared utility functions
+ * - DOM helpers
+ * - Small reusable logic
+ * =========================================================
+ */
 
-(function () {
+(function (window) {
   "use strict";
 
-  /* =========================================================
-     HELPER: DEBOUNCE
-     Prevents excessive function calls (scroll/resize)
-     ========================================================= */
-  window.debounce = function (fn, delay) {
-    let timeout;
-    return function () {
-      const context = this;
-      const args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(function () {
-        fn.apply(context, args);
-      }, delay);
-    };
+  const Utils = {};
+
+  /* ---------------------------------------------------------
+     DOM READY
+  --------------------------------------------------------- */
+  Utils.ready = function (fn) {
+    if (document.readyState !== "loading") {
+      fn();
+    } else {
+      document.addEventListener("DOMContentLoaded", fn);
+    }
   };
 
-  /* =========================================================
-     HELPER: ADD CLASS SAFELY
-     ========================================================= */
-  window.addClass = function (el, className) {
-    if (el && className && !el.classList.contains(className)) {
+  /* ---------------------------------------------------------
+     QUERY HELPERS
+  --------------------------------------------------------- */
+  Utils.qs = function (selector, scope) {
+    return (scope || document).querySelector(selector);
+  };
+
+  Utils.qsa = function (selector, scope) {
+    return (scope || document).querySelectorAll(selector);
+  };
+
+  /* ---------------------------------------------------------
+     CLASS HELPERS
+  --------------------------------------------------------- */
+  Utils.addClass = function (el, className) {
+    if (el && !el.classList.contains(className)) {
       el.classList.add(className);
     }
   };
 
-  /* =========================================================
-     HELPER: REMOVE CLASS SAFELY
-     ========================================================= */
-  window.removeClass = function (el, className) {
-    if (el && className && el.classList.contains(className)) {
+  Utils.removeClass = function (el, className) {
+    if (el && el.classList.contains(className)) {
       el.classList.remove(className);
     }
   };
 
-  /* =========================================================
-     SCROLL TO TOP BUTTON (OPTIONAL)
-     ========================================================= */
-  document.addEventListener("DOMContentLoaded", function () {
-    const scrollBtn = document.querySelector(".scroll-to-top");
-    if (!scrollBtn) return;
+  Utils.toggleClass = function (el, className) {
+    if (el) {
+      el.classList.toggle(className);
+    }
+  };
 
-    window.addEventListener(
-      "scroll",
-      debounce(function () {
-        if (window.scrollY > 400) {
-          scrollBtn.classList.add("visible");
-        } else {
-          scrollBtn.classList.remove("visible");
-        }
-      }, 100)
-    );
-
-    scrollBtn.addEventListener("click", function () {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+  /* ---------------------------------------------------------
+     EVENT DELEGATION
+  --------------------------------------------------------- */
+  Utils.on = function (parent, event, selector, handler) {
+    parent.addEventListener(event, function (e) {
+      if (e.target.closest(selector)) {
+        handler(e);
+      }
     });
-  });
+  };
 
-})();
+  /* ---------------------------------------------------------
+     SMOOTH SCROLL
+  --------------------------------------------------------- */
+  Utils.scrollTo = function (target) {
+    const el =
+      typeof target === "string"
+        ? document.querySelector(target)
+        : target;
+
+    if (!el) return;
+
+    el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  /* ---------------------------------------------------------
+     CURRENT YEAR (FOOTER)
+  --------------------------------------------------------- */
+  Utils.setCurrentYear = function () {
+    const yearEl = document.querySelector("[data-current-year]");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  };
+
+  /* ---------------------------------------------------------
+     SIMPLE DEBOUNCE
+  --------------------------------------------------------- */
+  Utils.debounce = function (fn, delay) {
+    let timeout;
+    return function () {
+      clearTimeout(timeout);
+      timeout = setTimeout(fn, delay);
+    };
+  };
+
+  /* ---------------------------------------------------------
+     EXPORT
+  --------------------------------------------------------- */
+  window.SiteUtils = Utils;
+
+  /* ---------------------------------------------------------
+     AUTO INIT
+  --------------------------------------------------------- */
+  Utils.ready(function () {
+    Utils.setCurrentYear();
+  });
+})(window);
