@@ -1,251 +1,213 @@
 /* =========================================================
    pages.css
+   Project: SaimaQaiser.com
    Purpose:
-   - Page-level layouts
-   - Stock ticker styling
-   - Section containers
-   - Shared UI blocks
+   - Inner page layouts ONLY
+   - Content sections
+   - Headings, tables, documents
+   - Investor / Governance / Legal pages
    ========================================================= */
 
-/* ---------- Global Page Container ---------- */
-.container {
-  width: 90%;
-  max-width: 1200px;
+/* -------------------- PAGE WRAPPER -------------------- */
+.page-wrapper {
+  padding: 70px 0;
+  background-color: #ffffff;
+}
+
+/* -------------------- PAGE HEADER -------------------- */
+.page-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.4rem;
+  color: #1f2d3d;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 1rem;
+  color: #6b7280;
+  max-width: 760px;
   margin: 0 auto;
 }
 
-/* ---------- Section Titles ---------- */
-.section-title {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 2.5rem;
+/* -------------------- CONTENT SECTIONS -------------------- */
+.page-section {
+  margin-bottom: 60px;
+}
+
+.page-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
   color: #1f2d3d;
 }
 
-/* =========================================================
-   STOCK TICKER
-   ========================================================= */
-
-.stock-ticker {
-  width: 100%;
-  background: #111;
-  overflow: hidden;
-  border-bottom: 1px solid #2a2a2a;
-  position: relative;
-  z-index: 50;
-}
-
-.ticker-track {
-  display: inline-flex;
-  align-items: center;
-  gap: 48px;
-  padding: 10px 0;
-  white-space: nowrap;
-  animation: tickerScroll 90s linear infinite;
-}
-
-.ticker-item {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #eaeaea;
-}
-
-.ticker-item.positive {
-  color: #2ecc71;
-}
-
-.ticker-item.negative {
-  color: #e74c3c;
-}
-
-@keyframes tickerScroll {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* Pause ticker on hover (professional touch) */
-.stock-ticker:hover .ticker-track {
-  animation-play-state: paused;
-}
-
-/* =========================================================
-   HERO SECTION
-   ========================================================= */
-
-.hero-section {
-  background: linear-gradient(135deg, #f4f7fb, #ffffff);
-  padding: 80px 0;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.hero-text h1 {
-  font-size: 2.8rem;
-  color: #1f2d3d;
+.page-section h3 {
+  font-size: 1.3rem;
   margin-bottom: 10px;
-}
-
-.hero-text h2 {
-  font-size: 2rem;
   color: #2c3e50;
 }
 
-.hero-text .designation {
-  font-size: 1.1rem;
-  color: #27ae60;
-  margin: 10px 0 20px;
-}
-
-.hero-text .intro {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.7;
-}
-
-.hero-image img {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 50%;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* =========================================================
-   SERVICES PREVIEW
-   ========================================================= */
-
-.services-preview {
-  padding: 70px 0;
-  background: #ffffff;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.service-card {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-card h3 {
-  color: #1f2d3d;
-  margin-bottom: 10px;
-}
-
-.service-card p {
+.page-section p {
   font-size: 0.95rem;
-  color: #666;
-}
-
-/* =========================================================
-   CTA SECTION
-   ========================================================= */
-
-.cta-section {
-  background: #1f2d3d;
-  color: #ffffff;
-  padding: 60px 0;
-  text-align: center;
-}
-
-.cta-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 14px 34px;
-  background: #2ecc71;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.cta-button:hover {
-  background: #27ae60;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.site-footer {
-  background: #0f1720;
-  color: #cfd8dc;
-  padding: 60px 0 30px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.site-footer h4 {
-  color: #ffffff;
+  line-height: 1.8;
+  color: #4b5563;
   margin-bottom: 15px;
 }
 
-.site-footer p,
-.site-footer a {
-  font-size: 0.9rem;
-  color: #cfd8dc;
+/* -------------------- LIST STYLES -------------------- */
+.page-section ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
 }
 
-.site-footer a {
-  text-decoration: none;
+.page-section ul li {
+  margin-bottom: 10px;
+  color: #374151;
+  line-height: 1.6;
 }
 
-.site-footer a:hover {
+/* -------------------- DOCUMENT / PDF BLOCK -------------------- */
+.document-box {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 30px 0;
+}
+
+.document-box h4 {
+  margin-bottom: 10px;
+  color: #1f2d3d;
+}
+
+.document-box a {
+  color: #1d6fa5;
+  font-weight: 500;
+}
+
+.document-box a:hover {
   text-decoration: underline;
 }
 
-.footer-credit {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #90a4ae;
+/* -------------------- TABLE STYLES -------------------- */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 30px 0;
 }
 
-/* =========================================================
-   RESPONSIVE ADJUSTMENTS
-   ========================================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
 
+table thead {
+  background-color: #0b3c5d;
+  color: #ffffff;
+}
+
+table th,
+table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* -------------------- NOTICE / DISCLAIMER -------------------- */
+.notice-box {
+  background-color: #fff7ed;
+  border-left: 4px solid #f59e0b;
+  padding: 20px;
+  margin: 30px 0;
+  color: #92400e;
+}
+
+.notice-box strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* -------------------- INVESTOR INFO GRID -------------------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.info-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.info-card h4 {
+  margin-bottom: 10px;
+  color: #1f2d3d;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* -------------------- DOWNLOAD BUTTON -------------------- */
+.download-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0b3c5d;
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.download-btn:hover {
+  background-color: #1d6fa5;
+}
+
+/* -------------------- PAGE NAV LINKS -------------------- */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+.page-nav a {
+  font-size: 0.9rem;
+  color: #1d6fa5;
+}
+
+.page-nav a:hover {
+  text-decoration: underline;
+}
+
+/* -------------------- RESPONSIVE -------------------- */
 @media (max-width: 992px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .hero-image img {
-    margin: 0 auto;
-  }
-
-  .services-grid {
+  .info-grid {
     grid-template-columns: 1fr;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
+  .page-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-wrapper {
+    padding: 50px 0;
+  }
+
+  table th,
+  table td {
+    font-size: 0.85rem;
   }
 }
