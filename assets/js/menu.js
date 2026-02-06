@@ -3,17 +3,18 @@
    Project: saimaqaiser.com
    Purpose:
    - Responsive navigation menu
-   - Mobile toggle behavior
+   - Mobile toggle support
    - Accessibility (ARIA + keyboard)
+   - Click-outside & ESC close
    ========================================================= */
 
 (function () {
   "use strict";
 
   /* ---------------------------------------------------------
-     DOM READY HELPER
+     DOM READY
   --------------------------------------------------------- */
-  function onReady(fn) {
+  function ready(fn) {
     if (document.readyState !== "loading") {
       fn();
     } else {
@@ -22,7 +23,7 @@
   }
 
   /* ---------------------------------------------------------
-     MOBILE MENU INITIALIZATION
+     MENU LOGIC
   --------------------------------------------------------- */
   function initMenu() {
     const toggle = document.querySelector(".menu-toggle");
@@ -30,7 +31,6 @@
 
     if (!toggle || !nav) return;
 
-    // ARIA defaults
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-controls", "primary-navigation");
 
@@ -38,31 +38,25 @@
       nav.classList.add("open");
       toggle.classList.add("active");
       toggle.setAttribute("aria-expanded", "true");
-      document.body.classList.add("menu-open");
+      document.body.classList.add("nav-open");
     }
 
     function closeMenu() {
       nav.classList.remove("open");
       toggle.classList.remove("active");
       toggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("menu-open");
+      document.body.classList.remove("nav-open");
     }
 
-    function toggleMenu() {
-      if (nav.classList.contains("open")) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    }
-
-    // Click toggle
-    toggle.addEventListener("click", function (e) {
+    function toggleMenu(e) {
       e.stopPropagation();
-      toggleMenu();
-    });
+      nav.classList.contains("open") ? closeMenu() : openMenu();
+    }
 
-    // Click outside closes menu
+    /* Toggle click */
+    toggle.addEventListener("click", toggleMenu);
+
+    /* Close on outside click */
     document.addEventListener("click", function (e) {
       if (
         nav.classList.contains("open") &&
@@ -73,7 +67,7 @@
       }
     });
 
-    // ESC key closes menu
+    /* Close on ESC */
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("open")) {
         closeMenu();
@@ -81,19 +75,14 @@
       }
     });
 
-    // Close menu on link click (mobile UX)
-    const links = nav.querySelectorAll("a");
-    links.forEach(function (link) {
-      link.addEventListener("click", function () {
-        closeMenu();
-      });
+    /* Close after clicking a link (mobile UX) */
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
     });
   }
 
   /* ---------------------------------------------------------
-     INITIALIZE
+     INIT
   --------------------------------------------------------- */
-  onReady(function () {
-    initMenu();
-  });
+  ready(initMenu);
 })();
