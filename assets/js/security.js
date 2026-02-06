@@ -1,40 +1,118 @@
-/**
- * =========================================================
- * security.js
- * Project: saimaqaiser.com
- * Purpose:
- * - Client-side security hardening
- * - Clickjacking prevention
- * - Referrer control
- * - Defensive UX behaviors
- * =========================================================
- */
+/* =========================================================
+   security.js
+   Project: saimaqaiser.com
+   Purpose:
+   - Client-side hardening for static website
+   - Prevent basic abuse, tampering & injections
+   - Defensive coding only (non-breaking)
+   ========================================================= */
 
 (function () {
   "use strict";
 
   /* ---------------------------------------------------------
-     ANTI-CLICKJACKING
-     Prevent site from being embedded in iframes
+     BLOCK IFRAME EMBEDDING (CLICKJACKING)
   --------------------------------------------------------- */
-  if (window.top !== window.self) {
-    try {
+  try {
+    if (window.top !== window.self) {
       window.top.location = window.self.location;
-    } catch (e) {
-      document.body.innerHTML = "";
     }
+  } catch (e) {
+    document.body.innerHTML = "";
   }
 
   /* ---------------------------------------------------------
-     REFERRER POLICY (CLIENT-SIDE FALLBACK)
+     DISABLE RIGHT CLICK (OPTIONAL HARDENING)
+     (Comment out if you don't want this)
   --------------------------------------------------------- */
-  const metaReferrer = document.createElement("meta");
-  metaReferrer.name = "referrer";
-  metaReferrer.content = "strict-origin-when-cross-origin";
-  document.head.appendChild(metaReferrer);
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
 
   /* ---------------------------------------------------------
-     DISABLE DRAGGING OF IMAGES (CONTENT SCRAPING)
+     DISABLE COMMON DEVTOOLS SHORTCUTS
+     (Does NOT stop professionals – only casual users)
+  --------------------------------------------------------- */
+  document.addEventListener("keydown", function (e) {
+    // F12
+    if (e.key === "F12") {
+      e.preventDefault();
+    }
+
+    // Ctrl+Shift+I / J / C
+    if (
+      e.ctrlKey &&
+      e.shiftKey &&
+      ["I", "J", "C"].includes(e.key.toUpperCase())
+    ) {
+      e.preventDefault();
+    }
+
+    // Ctrl+U (view source)
+    if (e.ctrlKey && e.key.toLowerCase() === "u") {
+      e.preventDefault();
+    }
+  });
+
+  /* ---------------------------------------------------------
+     BASIC INPUT SANITIZATION (DEFENSIVE)
+  --------------------------------------------------------- */
+  function sanitizeInput(value) {
+    return value
+      .replace(/</g, "")
+      .replace(/>/g, "")
+      .replace(/"/g, "")
+      .replace(/'/g, "")
+      .replace(/`/g, "");
+  }
+
+  document.addEventListener("input", function (e) {
+    const target = e.target;
+    if (
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA"
+    ) {
+      target.value = sanitizeInput(target.value);
+    }
+  });
+
+  /* ---------------------------------------------------------
+     BLOCK PASTE OF SCRIPT TAGS
+  --------------------------------------------------------- */
+  document.addEventListener("paste", function (e) {
+    const paste = (e.clipboardData || window.clipboardData).getData(
+      "text"
+    );
+    if (/<script\b/i.test(paste)) {
+      e.preventDefault();
+    }
+  });
+
+  /* ---------------------------------------------------------
+     DETECT SUSPICIOUS DOM MODIFICATIONS
+  --------------------------------------------------------- */
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (
+        mutation.addedNodes.length > 0 &&
+        Array.from(mutation.addedNodes).some(
+          (node) =>
+            node.nodeType === 1 &&
+            node.tagName === "SCRIPT"
+        )
+      ) {
+        console.warn("Blocked dynamic script injection");
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+
+  /* ---------------------------------------------------------
+     DISABLE DRAGGING OF IMAGES (BASIC ASSET PROTECTION)
   --------------------------------------------------------- */
   document.addEventListener("dragstart", function (e) {
     if (e.target.tagName === "IMG") {
@@ -42,59 +120,4 @@
     }
   });
 
-  /* ---------------------------------------------------------
-     DISABLE RIGHT CLICK ON LOGO & PROFILE IMAGE
-     (Deterrence only – not absolute protection)
-  --------------------------------------------------------- */
-  document.addEventListener("contextmenu", function (e) {
-    const protectedElements = ["IMG"];
-    if (protectedElements.includes(e.target.tagName)) {
-      e.preventDefault();
-    }
-  });
-
-  /* ---------------------------------------------------------
-     SOFT DEVTOOLS DETECTION (NON-INTRUSIVE)
-  --------------------------------------------------------- */
-  let devtoolsOpen = false;
-
-  const threshold = 160;
-  setInterval(function () {
-    const widthThreshold =
-      window.outerWidth - window.innerWidth > threshold;
-    const heightThreshold =
-      window.outerHeight - window.innerHeight > threshold;
-
-    if (widthThreshold || heightThreshold) {
-      if (!devtoolsOpen) {
-        devtoolsOpen = true;
-        console.warn(
-          "Developer tools detected. Unauthorized modification is prohibited."
-        );
-      }
-    } else {
-      devtoolsOpen = false;
-    }
-  }, 1000);
-
-  /* ---------------------------------------------------------
-     BLOCK COMMON CONSOLE INJECTION
-  --------------------------------------------------------- */
-  const originalConsole = console.log;
-  console.log = function () {
-    originalConsole.apply(console, arguments);
-  };
-
-  /* ---------------------------------------------------------
-     SANITY CHECK: SECURE CONTEXT
-  --------------------------------------------------------- */
-  if (
-    location.protocol !== "https:" &&
-    location.hostname !== "localhost" &&
-    !location.hostname.endsWith("github.io")
-  ) {
-    console.warn(
-      "This site is not running in a secure HTTPS context."
-    );
-  }
 })();
