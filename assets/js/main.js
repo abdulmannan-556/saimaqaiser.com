@@ -2,10 +2,10 @@
    main.js
    Project: saimaqaiser.com
    Purpose:
-   - Core site initialization
-   - Stock ticker logic
-   - Global UI helpers
-   - Safe DOM handling
+   - Global initialization
+   - Stock ticker bootstrap
+   - Footer year injection
+   - Animation & UX hooks
    ========================================================= */
 
 (function () {
@@ -14,7 +14,7 @@
   /* ---------------------------------------------------------
      DOM READY HELPER
   --------------------------------------------------------- */
-  function onReady(fn) {
+  function ready(fn) {
     if (document.readyState !== "loading") {
       fn();
     } else {
@@ -23,83 +23,79 @@
   }
 
   /* ---------------------------------------------------------
-     STOCK TICKER (INFINITE SMOOTH LOOP)
-     Matches reference video behavior
+     FOOTER YEAR (AUTO)
+  --------------------------------------------------------- */
+  function initFooterYear() {
+    const yearEl = document.querySelector("[data-current-year]");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  }
+
+  /* ---------------------------------------------------------
+     STOCK TICKER (STATIC BOOTSTRAP)
+     - Data can later be replaced by API
+     - CSS animation handles scrolling
   --------------------------------------------------------- */
   function initStockTicker() {
     const ticker = document.querySelector(".stock-ticker");
-    if (!ticker) return;
+    const track = ticker ? ticker.querySelector(".ticker-track") : null;
+    if (!ticker || !track) return;
 
-    const track = ticker.querySelector(".ticker-track");
-    if (!track) return;
+    const stocks = [
+      { s: "KEL", p: "7.12", c: "-0.02" },
+      { s: "BOP", p: "39.53", c: "-0.65" },
+      { s: "PTC", p: "60.43", c: "+1.55" },
+      { s: "OGDC", p: "321.81", c: "+2.12" },
+      { s: "FFC", p: "597.10", c: "-8.53" },
+      { s: "HBL", p: "336.89", c: "+7.01" },
+      { s: "LUCK", p: "465.43", c: "+16.70" },
+      { s: "PSO", p: "467.69", c: "+3.46" },
+    ];
 
-    // Duplicate content for seamless scrolling
-    const originalContent = track.innerHTML;
-    track.innerHTML += originalContent;
+    track.innerHTML = "";
 
-    // Pause on hover handled in CSS
+    stocks.forEach(function (item) {
+      const span = document.createElement("span");
+      span.className =
+        "ticker-item " + (item.c.startsWith("-") ? "negative" : "positive");
+      span.textContent = `${item.s} ${item.p} (${item.c})`;
+      track.appendChild(span);
+    });
+
+    /* Duplicate content for seamless loop */
+    track.innerHTML += track.innerHTML;
   }
 
   /* ---------------------------------------------------------
-     SCROLL SHADOW FOR HEADER (PROFESSIONAL TOUCH)
+     ANIMATION TRIGGERS (ON LOAD)
   --------------------------------------------------------- */
-  function initHeaderScroll() {
-    const header = document.querySelector(".site-header");
-    if (!header) return;
-
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (window.scrollY > 20) {
-          header.classList.add("scrolled");
-        } else {
-          header.classList.remove("scrolled");
-        }
-      },
-      { passive: true }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     SMOOTH SCROLL FOR INTERNAL LINKS
-  --------------------------------------------------------- */
-  function initSmoothScroll() {
-    const links = document.querySelectorAll('a[href^="#"]');
-
-    links.forEach(function (link) {
-      link.addEventListener("click", function (e) {
-        const targetId = this.getAttribute("href");
-        if (targetId.length <= 1) return;
-
-        const target = document.querySelector(targetId);
-        if (!target) return;
-
-        e.preventDefault();
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      });
+  function initAnimations() {
+    const animated = document.querySelectorAll("[data-animate]");
+    animated.forEach(function (el) {
+      const cls = el.getAttribute("data-animate");
+      if (cls) {
+        el.classList.add(cls);
+      }
     });
   }
 
   /* ---------------------------------------------------------
-     IMAGE SAFETY (PREVENT DRAGGING)
+     SAFE EXTERNAL LINK HANDLING
   --------------------------------------------------------- */
-  function lockImages() {
-    const images = document.querySelectorAll("img");
-    images.forEach(function (img) {
-      img.setAttribute("draggable", "false");
+  function secureExternalLinks() {
+    document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+      a.setAttribute("rel", "noopener noreferrer");
     });
   }
 
   /* ---------------------------------------------------------
-     INITIALIZE EVERYTHING
+     INIT ALL
   --------------------------------------------------------- */
-  onReady(function () {
+  ready(function () {
+    initFooterYear();
     initStockTicker();
-    initHeaderScroll();
-    initSmoothScroll();
-    lockImages();
+    initAnimations();
+    secureExternalLinks();
   });
 })();
