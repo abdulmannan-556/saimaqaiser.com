@@ -1,153 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =====================================================
+       BASIC META
+  ====================================================== -->
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saima Qaiser Securities | Abdul Mannan Butt – WordPress Frontend Developer</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Saima Qaiser Securities official website. Frontend developed by Abdul Mannan Butt, WordPress Frontend Developer." />
+  <title>Saima Qaiser Securities (Pvt) Ltd</title>
+
+  <meta name="description" content="Saima Qaiser Securities (Pvt) Ltd – Professional investment, brokerage and financial advisory services." />
   <meta name="robots" content="index, follow" />
 
-  <!-- CSS -->
+  <!-- =====================================================
+       STYLESHEETS
+  ====================================================== -->
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/header.css" />
-  <link rel="stylesheet" href="assets/css/home.css" />
-  <link rel="stylesheet" href="assets/css/pages.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/header.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
 
+  <!-- =====================================================
+       FAVICON (OPTIONAL)
+  ====================================================== -->
+  <link rel="icon" href="assets/images/logo/favicon.ico" />
 </head>
+
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="container header-flex">
-    <div class="logo">
-      <img src="assets/images/logo/logo.png" alt="Saima Qaiser Securities Logo" />
-    </div>
-
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="governance.html">Governance</a></li>
-        <li class="has-dropdown">
-          <a href="#">Investors</a>
-          <ul class="dropdown">
-            <li><a href="investor-information.html">Investor Information</a></li>
-            <li><a href="investors-portal.html">Investors Portal</a></li>
-            <li><a href="feedback.html">Feedback Form</a></li>
-          </ul>
-        </li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<!-- ================= STOCK TICKER ================= -->
-<section class="stock-ticker">
-  <div class="ticker-track">
-    <div class="ticker-item positive">KEL 7.10 (-0.28%)</div>
-    <div class="ticker-item negative">BOP 38.88 (-1.64%)</div>
-    <div class="ticker-item positive">PTC 61.98 (+2.57%)</div>
-    <div class="ticker-item positive">FCCL 57.05 (+1.59%)</div>
-    <div class="ticker-item positive">PPL 277.34 (+1.91%)</div>
-    <div class="ticker-item negative">FFC 588.57 (-1.43%)</div>
-    <div class="ticker-item positive">OGDC 323.93 (+0.66%)</div>
-    <div class="ticker-item positive">ENGROH 261.86 (+3.05%)</div>
-    <div class="ticker-item positive">HBL 343.90 (+2.08%)</div>
-    <div class="ticker-item positive">LUCK 482.13 (+3.59%)</div>
-  </div>
-</section>
-
-<!-- ================= HERO SECTION ================= -->
-<section class="hero-section">
-  <div class="container hero-grid">
-    
-    <div class="hero-text animate-fade-in-up">
-      <h1>Saima Qaiser Securities</h1>
-      <h2>Abdul Mannan Butt</h2>
-      <p class="designation">WordPress Frontend Developer</p>
-      <p class="intro">
-        Building secure, responsive, and professional financial websites with
-        modern frontend technologies and WordPress expertise.
-      </p>
-    </div>
-
-    <div class="hero-image animate-scale-in">
-      <img src="assets/images/hero/profile.jpg" alt="Abdul Mannan Butt" />
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= SERVICES PREVIEW ================= -->
-<section class="services-preview">
-  <div class="container">
-    <h2 class="section-title">Our Core Services</h2>
-
-    <div class="services-grid">
-      <div class="service-card hover-lift">
-        <h3>Equity Brokerage</h3>
-        <p>Professional brokerage services with transparency and compliance.</p>
+  <!-- =====================================================
+       HEADER / NAVIGATION
+  ====================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/images/logo/logo.png" alt="Saima Qaiser Securities" />
+        </a>
       </div>
-      <div class="service-card hover-lift">
-        <h3>Investment Advisory</h3>
-        <p>Strategic advisory tailored to investor risk profiles.</p>
-      </div>
-      <div class="service-card hover-lift">
-        <h3>Online Trading</h3>
-        <p>Secure and reliable trading platforms for investors.</p>
-      </div>
+
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="primary-navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="investors-portal.html">Investor Portal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       STOCK TICKER (EXACT POSITION)
+       Immediately below header
+  ====================================================== -->
+  <div class="stock-ticker">
+    <div class="ticker-track">
+      <!-- Injected by assets/js/main.js -->
     </div>
   </div>
-</section>
 
-<!-- ================= CTA ================= -->
-<section class="cta-section">
-  <div class="container">
-    <h2>Start Investing with Confidence</h2>
-    <a href="contact.html" class="cta-button hover-glow">Contact Us</a>
-  </div>
-</section>
+  <!-- =====================================================
+       HERO SECTION
+  ====================================================== -->
+  <section class="hero-section">
+    <div class="container hero-grid">
 
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container footer-grid">
+      <div class="hero-text" data-animate="animate-fade-in-up">
+        <h1>Saima Qaiser</h1>
+        <h2>Securities (Pvt) Ltd</h2>
+        <div class="designation">Licensed Brokerage & Investment Advisory</div>
+        <p class="intro">
+          Delivering transparent, professional and compliant financial services
+          to investors across Pakistan.
+        </p>
 
-    <div class="footer-about">
-      <h4>Saima Qaiser Securities</h4>
-      <p>
-        A regulated brokerage firm committed to investor protection,
-        transparency, and growth.
-      </p>
+        <a href="services.html" class="btn btn-primary mt-2">Explore Services</a>
+      </div>
+
+      <div class="hero-image" data-animate="animate-scale-in">
+        <img src="assets/images/profile.jpg" alt="Saima Qaiser" />
+      </div>
+
     </div>
+  </section>
 
-    <div class="footer-links">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="disclaimer.html">Disclaimer</a></li>
-        <li><a href="kyc-cdd.html">KYC / CDD Policy</a></li>
-        <li><a href="investors-portal.html">Investors Portal</a></li>
-      </ul>
+  <!-- =====================================================
+       SERVICES PREVIEW
+  ====================================================== -->
+  <section class="services-preview section">
+    <div class="container">
+
+      <h2 class="section-title">Our Core Services</h2>
+
+      <div class="services-grid">
+
+        <div class="service-card hover-lift" data-animate="animate-fade-in-up">
+          <h3>Equity Brokerage</h3>
+          <p>Professional execution, market access and portfolio guidance.</p>
+        </div>
+
+        <div class="service-card hover-lift" data-animate="animate-fade-in-up delay-100">
+          <h3>Investment Advisory</h3>
+          <p>Research-driven advice aligned with your financial goals.</p>
+        </div>
+
+        <div class="service-card hover-lift" data-animate="animate-fade-in-up delay-200">
+          <h3>Compliance & KYC</h3>
+          <p>Strict regulatory compliance and secure onboarding.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       CALL TO ACTION
+  ====================================================== -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Start Your Investment Journey Today</h2>
+      <a href="contact.html" class="cta-button">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div>
+        <h4>Saima Qaiser Securities</h4>
+        <p>
+          A trusted name in brokerage and financial advisory services.
+        </p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <p><a href="disclaimer.html">Disclaimer</a></p>
+        <p><a href="kyc-cdd.html">KYC / CDD</a></p>
+        <p><a href="investor-information.html">Investor Information</a></p>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p>Email: info@saimaqaiser.com</p>
+        <p>Pakistan</p>
+      </div>
+
     </div>
 
     <div class="footer-credit">
-      <p>
-        © 2026 Saima Qaiser Securities (Pvt) Ltd.<br />
-        Frontend by <strong>Abdul Mannan Butt</strong>
-      </p>
+      © <span data-current-year></span> Saima Qaiser Securities (Pvt) Ltd. All rights reserved.
     </div>
+  </footer>
 
-  </div>
-</footer>
-
-<!-- JS -->
-<script src="assets/js/menu.js"></script>
-<script src="assets/js/main.js"></script>
+  <!-- =====================================================
+       SCRIPTS
+  ====================================================== -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/security.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/form-validation.js"></script>
+  <script src="assets/js/main.js"></script>
 
 </body>
 </html>
