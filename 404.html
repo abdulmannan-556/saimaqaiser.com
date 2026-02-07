@@ -1,93 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =====================================================
+       BASIC META
+  ====================================================== -->
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 – Page Not Found | Saima Qaiser Securities</title>
 
-  <!-- SEO -->
+  <title>Page Not Found | Saima Qaiser Securities (Pvt) Ltd</title>
+
+  <meta name="description" content="The page you are looking for could not be found." />
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- CSS -->
+  <!-- =====================================================
+       STYLES
+  ====================================================== -->
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/pages.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
 
-  <style>
-    .error-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f4f7fb, #ffffff);
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .error-box {
-      max-width: 520px;
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    .error-code {
-      font-size: 6rem;
-      font-weight: 800;
-      color: #1f2d3d;
-      margin-bottom: 10px;
-    }
-
-    .error-title {
-      font-size: 1.8rem;
-      color: #2c3e50;
-      margin-bottom: 15px;
-    }
-
-    .error-text {
-      font-size: 1rem;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    .error-actions a {
-      display: inline-block;
-      padding: 12px 28px;
-      background: #2ecc71;
-      color: #ffffff;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s ease;
-    }
-
-    .error-actions a:hover {
-      background: #27ae60;
-    }
-  </style>
+  <link rel="icon" href="assets/images/logo/favicon.ico" />
 </head>
 
 <body>
 
-<section class="error-page">
-  <div class="error-box">
-    <div class="error-code">404</div>
-    <h1 class="error-title">Page Not Found</h1>
-    <p class="error-text">
-      The page you are looking for does not exist or may have been moved.
-      Please return to the homepage or contact us if you believe this is an error.
-    </p>
+  <!-- =====================================================
+       404 CONTENT
+  ====================================================== -->
+  <section class="section section-light" style="min-height: 100vh; display: flex; align-items: center;">
+    <div class="container text-center">
 
-    <div class="error-actions">
-      <a href="index.html">Back to Homepage</a>
+      <h1 style="font-size: 5rem; margin-bottom: 10px;">404</h1>
+
+      <h2 class="mb-2">Page Not Found</h2>
+
+      <p class="mb-3">
+        The page you are trying to access does not exist or may have been moved.
+      </p>
+
+      <a href="index.html" class="btn btn-primary">
+        Go Back to Home
+      </a>
+
     </div>
+  </section>
 
-    <p style="margin-top:30px;font-size:0.85rem;color:#777;">
-      © 2026 Saima Qaiser Securities (Pvt) Ltd<br />
-      Frontend by <strong>Abdul Mannan Butt</strong>
-    </p>
-  </div>
-</section>
+  <!-- =====================================================
+       FOOTER (LIGHT)
+  ====================================================== -->
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p class="footer-credit">
+        © <span data-current-year></span> Saima Qaiser Securities (Pvt) Ltd. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       SCRIPT (YEAR ONLY)
+  ====================================================== -->
+  <script>
+    document.querySelectorAll('[data-current-year]').forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
+  </script>
 
 </body>
 </html>
