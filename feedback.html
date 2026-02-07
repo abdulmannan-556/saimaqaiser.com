@@ -8,9 +8,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Corporate Governance | Saima Qaiser Securities (Pvt) Ltd</title>
+  <title>Feedback & Complaints | Saima Qaiser Securities (Pvt) Ltd</title>
 
-  <meta name="description" content="Corporate governance framework, ethical standards, and compliance practices of Saima Qaiser Securities (Pvt) Ltd." />
+  <meta name="description" content="Submit feedback, concerns, or complaints to Saima Qaiser Securities (Pvt) Ltd." />
   <meta name="robots" content="index, follow" />
 
   <!-- =====================================================
@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
   <link rel="stylesheet" href="assets/css/header.css" />
+  <link rel="stylesheet" href="assets/css/forms.css" />
   <link rel="stylesheet" href="assets/css/pages.css" />
   <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
@@ -65,68 +66,65 @@
   ====================================================== -->
   <section class="section section-light">
     <div class="container text-center">
-      <h1 class="mb-2">Corporate Governance</h1>
+      <h1 class="mb-2">Feedback & Complaints</h1>
       <p class="mb-3">
-        Our governance framework ensures transparency, accountability, and regulatory compliance.
+        We value transparency and accountability. Please share your feedback or concerns.
       </p>
     </div>
   </section>
 
   <!-- =====================================================
-       GOVERNANCE CONTENT
+       FEEDBACK FORM
   ====================================================== -->
   <section class="section">
     <div class="container">
 
-      <div class="content-block mb-3">
-        <h2>Governance Philosophy</h2>
-        <p>
-          Saima Qaiser Securities (Pvt) Ltd operates under a governance framework that prioritizes
-          ethical conduct, regulatory compliance, and the protection of stakeholder interests.
-        </p>
-      </div>
+      <form class="form-card" id="feedbackForm" novalidate>
 
-      <div class="content-block mb-3">
-        <h2>Board Oversight</h2>
-        <p>
-          The company is overseen by its management in accordance with applicable laws,
-          regulations, and best practices relevant to the securities industry in Pakistan.
-        </p>
-      </div>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required />
+        </div>
 
-      <div class="content-block mb-3">
-        <h2>Risk Management</h2>
-        <p>
-          Risk management policies are implemented to identify, assess, and mitigate operational,
-          financial, and compliance risks. Internal controls are reviewed periodically.
-        </p>
-      </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
 
-      <div class="content-block mb-3">
-        <h2>Compliance & Ethics</h2>
-        <p>
-          The company adheres strictly to applicable regulatory requirements, including those
-          issued by relevant authorities. Employees are expected to follow a strict code of
-          conduct and ethical standards.
-        </p>
-      </div>
+        <div class="form-group">
+          <label for="contact">Contact Number</label>
+          <input type="tel" id="contact" name="contact" />
+        </div>
 
-      <div class="content-block mb-3">
-        <h2>Client Protection</h2>
-        <p>
-          Client confidentiality, fair dealing, and transparent communication form the cornerstone
-          of our relationship with investors. Complaints and feedback are handled through formal
-          procedures.
-        </p>
-      </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="">Select an option</option>
+            <option value="feedback">General Feedback</option>
+            <option value="complaint">Complaint</option>
+            <option value="query">Query</option>
+          </select>
+        </div>
 
-      <div class="content-block">
-        <h2>Continuous Improvement</h2>
-        <p>
-          Governance policies and procedures are reviewed and updated periodically to reflect
-          regulatory changes and evolving industry standards.
-        </p>
-      </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <div class="form-note">
+          <p>
+            Please note: This form does not constitute a legal notice or investment instruction.
+            Submissions are reviewed during business hours only.
+          </p>
+        </div>
+
+        <div class="text-center mt-2">
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+
+      </form>
 
     </div>
   </section>
@@ -139,13 +137,13 @@
 
       <div>
         <h4>Saima Qaiser Securities</h4>
-        <p>Governance · Integrity · Compliance</p>
+        <p>Client-first · Compliance-driven</p>
       </div>
 
       <div>
-        <h4>Information</h4>
-        <p><a href="disclaimer.html">Disclaimer</a></p>
+        <h4>Support</h4>
         <p><a href="feedback.html">Feedback & Complaints</a></p>
+        <p><a href="disclaimer.html">Disclaimer</a></p>
       </div>
 
       <div>
@@ -166,6 +164,7 @@
   ====================================================== -->
   <script src="assets/js/utils.js"></script>
   <script src="assets/js/security.js"></script>
+  <script src="assets/js/form-validation.js"></script>
   <script src="assets/js/menu.js"></script>
   <script src="assets/js/main.js"></script>
 
