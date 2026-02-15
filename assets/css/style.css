@@ -1,278 +1,347 @@
+/* =========================================================
+   STYLE.CSS
+   Project: saimaqaiser.com
+   Purpose:
+   - Global styling
+   - Layout system
+   - Stock ticker styling
+   - Animation utilities
+   - Responsive system
+========================================================= */
+
 /* ===============================
-   GLOBAL RESET
-=================================*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+   RESET
+================================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    color: #1a1a1a;
-    line-height: 1.6;
-    background-color: #ffffff;
+  font-family: "Inter", sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ===============================
    CONTAINER
-=================================*/
+================================= */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* ===============================
    TYPOGRAPHY
-=================================*/
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
+================================= */
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: #0a1f44;
 }
 
 h1 {
-    font-size: 48px;
-    line-height: 1.2;
+  font-size: 48px;
+  line-height: 1.2;
 }
 
 h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
 h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
 p {
-    font-size: 16px;
-    margin-bottom: 15px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   STOCK TICKER
+================================= */
+.stock-ticker {
+  background: #06152f;
+  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.ticker-track {
+  display: inline-block;
+  animation: ticker-scroll 25s linear infinite;
+}
+
+.ticker-item {
+  margin: 0 30px;
+  font-weight: 500;
+}
+
+.ticker-item.positive {
+  color: #3bd671;
+}
+
+.ticker-item.negative {
+  color: #ff4d4d;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* ===============================
    HEADER
-=================================*/
+================================= */
 .header {
-    background: #0a1f44;
-    padding: 18px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  background: #0a1f44;
+  padding: 18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo img {
-    height: 55px;
+  height: 55px;
 }
 
 .nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
+  list-style: none;
+  display: flex;
+  gap: 30px;
 }
 
 .nav a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 500;
-    transition: 0.3s ease;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: 0.3s ease;
 }
 
 .nav a:hover,
 .nav a.active {
-    color: #d4af37;
+  color: #d4af37;
 }
 
 /* ===============================
-   MOBILE MENU
-=================================*/
+   MOBILE NAV
+================================= */
 .mobile-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
 }
 
 .mobile-toggle span {
-    width: 25px;
-    height: 3px;
-    background: #ffffff;
+  width: 25px;
+  height: 3px;
+  background: #ffffff;
 }
 
 /* ===============================
-   HERO SECTION
-=================================*/
+   HERO
+================================= */
 .hero {
-    background: linear-gradient(rgba(10,31,68,0.85), rgba(10,31,68,0.85)),
-                url('../images/hero.jpg') center/cover no-repeat;
-    color: #ffffff;
-    padding: 120px 0;
-    text-align: center;
+  background: linear-gradient(rgba(10, 31, 68, 0.85), rgba(10, 31, 68, 0.85)),
+    url("../images/hero.jpg") center/cover no-repeat;
+  color: #ffffff;
+  text-align: center;
+  padding: 130px 0;
 }
 
 .hero h1 {
-    margin-bottom: 20px;
+  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
 
 /* ===============================
    BUTTONS
-=================================*/
+================================= */
 .btn-primary,
 .btn-secondary,
 .btn-light {
-    display: inline-block;
-    padding: 12px 28px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s ease;
-    border-radius: 3px;
+  display: inline-block;
+  padding: 12px 28px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 3px;
+  transition: 0.3s ease;
 }
 
 .btn-primary {
-    background: #d4af37;
-    color: #0a1f44;
+  background: #d4af37;
+  color: #0a1f44;
 }
 
 .btn-primary:hover {
-    background: #c29c2f;
+  background: #c29c2f;
 }
 
 .btn-secondary {
-    background: #0a1f44;
-    color: #ffffff;
+  background: #0a1f44;
+  color: #ffffff;
 }
 
 .btn-secondary:hover {
-    background: #06152f;
+  background: #06152f;
 }
 
 .btn-light {
-    background: #ffffff;
-    color: #0a1f44;
+  background: #ffffff;
+  color: #0a1f44;
 }
 
 .btn-light:hover {
-    background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 /* ===============================
    SECTIONS
-=================================*/
+================================= */
 .section {
-    padding: 80px 0;
+  padding: 80px 0;
 }
 
 .light-bg {
-    background: #f7f7f7;
+  background: #f7f7f7;
 }
 
 .section-title {
-    text-align: center;
-    margin-bottom: 50px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 /* ===============================
-   TWO COLUMN LAYOUT
-=================================*/
+   GRID & LAYOUT
+================================= */
 .two-column {
-    display: flex;
-    align-items: center;
-    gap: 50px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
 }
 
 .two-column img {
-    width: 100%;
-    border-radius: 4px;
+  width: 100%;
+  border-radius: 4px;
 }
 
-/* ===============================
-   SERVICES GRID
-=================================*/
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 
 .service-card {
-    background: #ffffff;
-    padding: 35px;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 /* ===============================
    CTA
-=================================*/
+================================= */
 .cta {
-    background: #0a1f44;
-    color: #ffffff;
-    text-align: center;
-    padding: 70px 0;
+  background: #0a1f44;
+  color: #ffffff;
+  text-align: center;
+  padding: 70px 0;
 }
 
 .cta h2 {
-    margin-bottom: 25px;
+  color: #ffffff;
+  margin-bottom: 25px;
 }
 
 /* ===============================
    FOOTER
-=================================*/
+================================= */
 .footer {
-    background: #06152f;
-    color: #ffffff;
-    padding: 25px 0;
-    text-align: center;
+  background: #06152f;
+  color: #ffffff;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ===============================
+   ANIMATIONS
+================================= */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 /* ===============================
    RESPONSIVE
-=================================*/
+================================= */
 @media (max-width: 992px) {
+  h1 {
+    font-size: 36px;
+  }
 
-    h1 {
-        font-size: 36px;
-    }
+  h2 {
+    font-size: 28px;
+  }
 
-    h2 {
-        font-size: 28px;
-    }
+  .two-column {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .two-column {
-        flex-direction: column;
-        text-align: center;
-    }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
+  .nav {
+    display: none;
+  }
 
-    .nav {
-        display: none;
-    }
-
-    .mobile-toggle {
-        display: flex;
-    }
+  .mobile-toggle {
+    display: flex;
+  }
 }
