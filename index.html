@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Setup -->
+    <!-- =========================================
+         META
+    ========================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saima Qaiser Securities (Pvt) Limited</title>
     <meta name="description" content="Saima Qaiser Securities (Pvt) Limited - Professional Financial & Investment Services">
-    
-    <!-- Google Fonts -->
+
+    <!-- =========================================
+         FONTS
+    ========================================== -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Main CSS -->
+    <!-- =========================================
+         CSS
+    ========================================== -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- JS -->
+    <!-- =========================================
+         JS
+    ========================================== -->
     <script defer src="assets/js/main.js"></script>
 </head>
+
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- ======================================================
+     STOCK TICKER
+====================================================== -->
+<div class="stock-ticker">
+    <div class="ticker-track"></div>
+</div>
+
+<!-- ======================================================
+     HEADER
+====================================================== -->
 <header class="header">
     <div class="container header-container">
         <div class="logo">
-            <img src="assets/images/logo.png" alt="Saima Qaiser Securities Logo">
+            <img src="assets/images/logo.png" alt="Saima Qaiser Securities">
         </div>
 
         <nav class="nav">
@@ -42,8 +60,10 @@
     </div>
 </header>
 
-<!-- ================= HERO SECTION ================= -->
-<section class="hero">
+<!-- ======================================================
+     HERO
+====================================================== -->
+<section class="hero" data-animate="fade-in">
     <div class="container hero-content">
         <h1>Saima Qaiser Securities (Pvt) Limited</h1>
         <p>Your Trusted Partner in Financial & Investment Growth</p>
@@ -51,8 +71,10 @@
     </div>
 </section>
 
-<!-- ================= ABOUT PREVIEW ================= -->
-<section class="about-preview section">
+<!-- ======================================================
+     ABOUT PREVIEW
+====================================================== -->
+<section class="section about-preview" data-animate="fade-in">
     <div class="container two-column">
         <div class="text-content">
             <h2>Who We Are</h2>
@@ -69,8 +91,10 @@
     </div>
 </section>
 
-<!-- ================= SERVICES ================= -->
-<section class="services section light-bg">
+<!-- ======================================================
+     SERVICES
+====================================================== -->
+<section class="section light-bg services" data-animate="fade-in">
     <div class="container">
         <h2 class="section-title">Our Core Services</h2>
 
@@ -93,18 +117,22 @@
     </div>
 </section>
 
-<!-- ================= CALL TO ACTION ================= -->
-<section class="cta">
+<!-- ======================================================
+     CTA
+====================================================== -->
+<section class="cta" data-animate="fade-in">
     <div class="container">
         <h2>Ready to Build Your Financial Future?</h2>
         <a href="contact.html" class="btn-light">Contact Us Today</a>
     </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ======================================================
+     FOOTER
+====================================================== -->
 <footer class="footer">
     <div class="container footer-container">
-        <p>© 2026 Saima Qaiser Securities (Pvt) Limited</p>
+        <p>© <span data-current-year></span> Saima Qaiser Securities (Pvt) Limited</p>
         <p>All Rights Reserved</p>
     </div>
 </footer>
