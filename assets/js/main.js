@@ -6,6 +6,8 @@
    - Stock ticker bootstrap
    - Footer year injection
    - Animation & UX hooks
+   - Mobile navigation
+   - Active link detection
    ========================================================= */
 
 (function () {
@@ -33,9 +35,37 @@
   }
 
   /* ---------------------------------------------------------
+     MOBILE NAVIGATION
+  --------------------------------------------------------- */
+  function initMobileNav() {
+    const toggle = document.getElementById("mobileToggle");
+    const nav = document.querySelector(".nav");
+
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener("click", function () {
+      nav.classList.toggle("nav-open");
+      toggle.classList.toggle("active");
+    });
+  }
+
+  /* ---------------------------------------------------------
+     ACTIVE LINK DETECTION
+  --------------------------------------------------------- */
+  function initActiveLinks() {
+    const current = window.location.pathname.split("/").pop() || "index.html";
+    const links = document.querySelectorAll(".nav a");
+
+    links.forEach(function (link) {
+      const href = link.getAttribute("href");
+      if (href === current) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
      STOCK TICKER (STATIC BOOTSTRAP)
-     - Data can later be replaced by API
-     - CSS animation handles scrolling
   --------------------------------------------------------- */
   function initStockTicker() {
     const ticker = document.querySelector(".stock-ticker");
@@ -50,7 +80,7 @@
       { s: "FFC", p: "597.10", c: "-8.53" },
       { s: "HBL", p: "336.89", c: "+7.01" },
       { s: "LUCK", p: "465.43", c: "+16.70" },
-      { s: "PSO", p: "467.69", c: "+3.46" },
+      { s: "PSO", p: "467.69", c: "+3.46" }
     ];
 
     track.innerHTML = "";
@@ -68,15 +98,29 @@
   }
 
   /* ---------------------------------------------------------
-     ANIMATION TRIGGERS (ON LOAD)
+     SCROLL ANIMATIONS (INTERSECTION OBSERVER)
   --------------------------------------------------------- */
-  function initAnimations() {
-    const animated = document.querySelectorAll("[data-animate]");
-    animated.forEach(function (el) {
-      const cls = el.getAttribute("data-animate");
-      if (cls) {
-        el.classList.add(cls);
-      }
+  function initScrollAnimations() {
+    const elements = document.querySelectorAll("[data-animate]");
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            const animationClass = entry.target.getAttribute("data-animate");
+            if (animationClass) {
+              entry.target.classList.add(animationClass);
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    elements.forEach(function (el) {
+      observer.observe(el);
     });
   }
 
@@ -94,8 +138,10 @@
   --------------------------------------------------------- */
   ready(function () {
     initFooterYear();
+    initMobileNav();
+    initActiveLinks();
     initStockTicker();
-    initAnimations();
+    initScrollAnimations();
     secureExternalLinks();
   });
 })();
