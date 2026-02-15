@@ -1,181 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =====================================================
-       BASIC META
-  ====================================================== -->
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Meta Setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saima Qaiser Securities (Pvt) Limited</title>
+    <meta name="description" content="Saima Qaiser Securities (Pvt) Limited - Professional Financial & Investment Services">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <title>Saima Qaiser Securities (Pvt) Ltd</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 
-  <meta name="description" content="Saima Qaiser Securities (Pvt) Ltd – Professional investment, brokerage and financial advisory services." />
-  <meta name="robots" content="index, follow" />
-
-  <!-- =====================================================
-       STYLESHEETS
-  ====================================================== -->
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/animations.css" />
-  <link rel="stylesheet" href="assets/css/header.css" />
-  <link rel="stylesheet" href="assets/css/pages.css" />
-  <link rel="stylesheet" href="assets/css/home.css" />
-  <link rel="stylesheet" href="assets/css/footer.css" />
-  <link rel="stylesheet" href="assets/css/responsive.css" />
-
-  <!-- =====================================================
-       FAVICON (OPTIONAL)
-  ====================================================== -->
-  <link rel="icon" href="assets/images/logo/favicon.ico" />
+    <!-- JS -->
+    <script defer src="assets/js/main.js"></script>
 </head>
-
 <body>
 
-  <!-- =====================================================
-       HEADER / NAVIGATION
-  ====================================================== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="logo">
-        <a href="index.html">
-          <img src="assets/images/logo/logo.png" alt="Saima Qaiser Securities" />
-        </a>
-      </div>
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container header-container">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="Saima Qaiser Securities Logo">
+        </div>
 
-      <button class="menu-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
 
-      <nav class="site-nav" id="primary-navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="investors-portal.html">Investor Portal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
-  </header>
+</header>
 
-  <!-- =====================================================
-       STOCK TICKER (EXACT POSITION)
-       Immediately below header
-  ====================================================== -->
-  <div class="stock-ticker">
-    <div class="ticker-track">
-      <!-- Injected by assets/js/main.js -->
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <div class="container hero-content">
+        <h1>Saima Qaiser Securities (Pvt) Limited</h1>
+        <p>Your Trusted Partner in Financial & Investment Growth</p>
+        <a href="contact.html" class="btn-primary">Get Started</a>
     </div>
-  </div>
+</section>
 
-  <!-- =====================================================
-       HERO SECTION
-  ====================================================== -->
-  <section class="hero-section">
-    <div class="container hero-grid">
+<!-- ================= ABOUT PREVIEW ================= -->
+<section class="about-preview section">
+    <div class="container two-column">
+        <div class="text-content">
+            <h2>Who We Are</h2>
+            <p>
+                We provide structured investment solutions, professional equity trading,
+                and strategic financial advisory services tailored to modern markets.
+            </p>
+            <a href="about.html" class="btn-secondary">Learn More</a>
+        </div>
 
-      <div class="hero-text" data-animate="animate-fade-in-up">
-        <h1>Saima Qaiser</h1>
-        <h2>Securities (Pvt) Ltd</h2>
-        <div class="designation">Licensed Brokerage & Investment Advisory</div>
-        <p class="intro">
-          Delivering transparent, professional and compliant financial services
-          to investors across Pakistan.
-        </p>
-
-        <a href="services.html" class="btn btn-primary mt-2">Explore Services</a>
-      </div>
-
-      <div class="hero-image" data-animate="animate-scale-in">
-        <img src="assets/images/profile.jpg" alt="Saima Qaiser" />
-      </div>
-
+        <div class="image-content">
+            <img src="assets/images/about.jpg" alt="About Company">
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- =====================================================
-       SERVICES PREVIEW
-  ====================================================== -->
-  <section class="services-preview section">
+<!-- ================= SERVICES ================= -->
+<section class="services section light-bg">
     <div class="container">
+        <h2 class="section-title">Our Core Services</h2>
 
-      <h2 class="section-title">Our Core Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Equity Trading</h3>
+                <p>Professional trading services built on research-driven strategies.</p>
+            </div>
 
-      <div class="services-grid">
+            <div class="service-card">
+                <h3>Investment Advisory</h3>
+                <p>Personalized advisory to maximize returns and minimize risks.</p>
+            </div>
 
-        <div class="service-card hover-lift" data-animate="animate-fade-in-up">
-          <h3>Equity Brokerage</h3>
-          <p>Professional execution, market access and portfolio guidance.</p>
+            <div class="service-card">
+                <h3>Portfolio Management</h3>
+                <p>Structured and diversified portfolio management solutions.</p>
+            </div>
         </div>
-
-        <div class="service-card hover-lift" data-animate="animate-fade-in-up delay-100">
-          <h3>Investment Advisory</h3>
-          <p>Research-driven advice aligned with your financial goals.</p>
-        </div>
-
-        <div class="service-card hover-lift" data-animate="animate-fade-in-up delay-200">
-          <h3>Compliance & KYC</h3>
-          <p>Strict regulatory compliance and secure onboarding.</p>
-        </div>
-
-      </div>
     </div>
-  </section>
+</section>
 
-  <!-- =====================================================
-       CALL TO ACTION
-  ====================================================== -->
-  <section class="cta-section">
+<!-- ================= CALL TO ACTION ================= -->
+<section class="cta">
     <div class="container">
-      <h2>Start Your Investment Journey Today</h2>
-      <a href="contact.html" class="cta-button">Contact Us</a>
+        <h2>Ready to Build Your Financial Future?</h2>
+        <a href="contact.html" class="btn-light">Contact Us Today</a>
     </div>
-  </section>
+</section>
 
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-
-      <div>
-        <h4>Saima Qaiser Securities</h4>
-        <p>
-          A trusted name in brokerage and financial advisory services.
-        </p>
-      </div>
-
-      <div>
-        <h4>Quick Links</h4>
-        <p><a href="disclaimer.html">Disclaimer</a></p>
-        <p><a href="kyc-cdd.html">KYC / CDD</a></p>
-        <p><a href="investor-information.html">Investor Information</a></p>
-      </div>
-
-      <div>
-        <h4>Contact</h4>
-        <p>Email: info@saimaqaiser.com</p>
-        <p>Pakistan</p>
-      </div>
-
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="container footer-container">
+        <p>© 2026 Saima Qaiser Securities (Pvt) Limited</p>
+        <p>All Rights Reserved</p>
     </div>
-
-    <div class="footer-credit">
-      © <span data-current-year></span> Saima Qaiser Securities (Pvt) Ltd. All rights reserved.
-    </div>
-  </footer>
-
-  <!-- =====================================================
-       SCRIPTS
-  ====================================================== -->
-  <script src="assets/js/utils.js"></script>
-  <script src="assets/js/security.js"></script>
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/form-validation.js"></script>
-  <script src="assets/js/main.js"></script>
+</footer>
 
 </body>
 </html>
